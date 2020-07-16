@@ -1,25 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useQuery } from '@apollo/react-hooks';
+import { NEWS_QUERY } from './apollo/query';
+import { ContentWrapper, HeaderWrapper, Header, BorderLine, MainWrapper}  from './stylesheet/stylesheet';
+import NavLink  from './components/NavLink';
+import FrontHeadliner from './components/FrontHeadliner';
 
-function App() {
+
+
+const App = (props) => {
+  const { loading, error, data } = useQuery(NEWS_QUERY);
+  console.log( { loading, error, data });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ContentWrapper>
+      <HeaderWrapper>
+        <Header>Today's Tech News</Header>
+        <BorderLine />
+        <NavLink />
+        <MainWrapper>
+          <FrontHeadliner />
+        </MainWrapper>
+      </HeaderWrapper>
+      
+    </ContentWrapper>
   );
 }
 
