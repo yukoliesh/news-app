@@ -96,5 +96,8 @@ export const PopularHeader = styled.h2`
   font-size: 1em;
 `;
 
+export const LatestWrapper = styled.div`
+  margin: 0 auto;
+`;
 
 
