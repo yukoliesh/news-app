@@ -1,13 +1,13 @@
 import React from 'react';
 
-const LatestNews = (props) => {
+const PopulartNews = (props) => {
   // const { loading, error, data } = useQuery(NEWS_QUERY);
   // console.log( { loading, error, data });
   return (
     <LatestWrapper>
-      <p>This is the latest news</p>
+      <p>This is the popular news</p>
     </LatestWrapper>
   );
 }
 
-export default LatestNews;
+export default PopulartNews;
