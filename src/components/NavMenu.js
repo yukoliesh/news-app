@@ -1,8 +1,11 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { NavCont, NavItem, NavAction }  from '../stylesheet/stylesheet';
 
 
-const NavLink = (props) => {
+
+const NavMenu = (props) => {
+  console.log("nav props", props);
   const onLatestNewsClick = (e) => {
     e.preventDefault();
     console.log("clicked!");
@@ -23,19 +26,19 @@ const NavLink = (props) => {
   return (
     <NavCont>
       <NavItem>
-        <NavAction onClick={onLatestNewsClick}>Latest News</NavAction>
+        <NavAction to="/Latest-News" onClick={onLatestNewsClick}>Latest News</NavAction>
       </NavItem>
       <NavItem>
-        <NavAction onClick={onPopularNewsClick}>Popular News</NavAction>
+        <NavAction to="/Popular-News" onClick={onPopularNewsClick}>Popular News</NavAction>
       </NavItem>
       <NavItem>
-        <NavAction onClick={onYourFavoriteClick}>Your Favorite</NavAction>
+        <NavAction to="/Your-Favorite" onClick={onYourFavoriteClick}>Your Favorite</NavAction>
       </NavItem>
       <NavItem>
-        <NavAction onClick={onBookmarkClick}>Bookmark</NavAction>
+        <NavAction to="/Bookmark" onClick={onBookmarkClick}>Bookmark</NavAction>
       </NavItem>
     </NavCont>
   );
 }
 
-export default NavLink;
+export default withRouter(NavMenu);

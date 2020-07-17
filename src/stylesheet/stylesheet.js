@@ -1,8 +1,9 @@
+// import { Link } from 'react-router-dom';
 import styled, { css } from '@xstyled/styled-components';
 import { system } from '@xstyled/system'
 
 // Common CSS
-export const displayflex = css`
+const displayflex = css`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,18 +23,18 @@ const light = "300";
 // Font Style
 
 // App component
-export const ContentWrapper = styled.div`
+const ContentWrapper = styled.div`
   ${displayflex}
   min-height: 40vh;
   padding: 3em;
   font-family: 'Montserrat', sans-serif;
 `;
 
-export const HeaderWrapper = styled.div`
+const HeaderWrapper = styled.div`
   width: 50vw;
   padding: 2em;
 `;
-export const Header = styled.h1`
+const Header = styled.h1`
   font-size: 3em;
   font-style: italic;
   font-weight: ${light};
@@ -41,27 +42,27 @@ export const Header = styled.h1`
   text-align: center;
   padding-bottom: 0.2em;
 `;
-export const BorderLine = styled.div`
+const BorderLine = styled.div`
   border-bottom: solid 1px ${lightMode_purple};
 `;
 
-export const MainWrapper = styled.div`
+const MainWrapper = styled.div`
   ${displayflex}
   padding-top: 2em; 
 `;
 
 // Navlink Component
-export const NavCont = styled.ul`
+const NavCont = styled.ul`
   list-style: none;
   display: flex;
   justify-content: space-between;
   padding: 0;
 `;
-export const NavItem = styled.li`
+const NavItem = styled.li`
   line-height: 1.5;
 `;
 
-export const NavAction = styled.button`
+const NavAction = styled.a`
   cursor: pointer;
   border: none;
   background-color: transparent;
@@ -72,15 +73,15 @@ export const NavAction = styled.button`
 `;
 
 // Box
-export const Box = styled.div`
+const Box = styled.div`
   ${system}
 `;
-export const HeadlinerColBox = styled(Box)`
+const HeadlinerColBox = styled(Box)`
   width: 100%;
 `;
 
 // Front HeadLiner
-export const LatestHeader = styled.h2`
+const LatestHeader = styled.h2`
   background-color: ${lightMode_blue};
   color: ${lightMode_white};
   padding: 0.5em 1em;
@@ -88,13 +89,32 @@ export const LatestHeader = styled.h2`
   font-size: 1em;
 `;
 
-export const PopularHeader = styled.h2`
+const PopularHeader = styled.h2`
   background-color: ${lightMode_green};
   color: ${lightMode_white};
   padding: 0.5em 1em;
   border-radius: 0.3em;
   font-size: 1em;
 `;
+const LatestWrapper = styled.div`
+  margin: 0 auto;
+`;
+
+export{
+  ContentWrapper,
+  HeaderWrapper,
+  Header,
+  BorderLine,
+  MainWrapper,
+  NavCont,
+  NavItem,
+  NavAction,
+  Box,
+  HeadlinerColBox,
+  LatestHeader,
+  PopularHeader,
+  LatestWrapper
+}
 
 
 
