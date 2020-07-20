@@ -5,8 +5,8 @@ import { Box }  from '../stylesheet/stylesheet';
 const NewsItem = (props) => {
   return (
     <React.Fragment>
-      <Box><a href={url} target="_blank">{title}</a></Box>
-      <Box>{time}</Box>
+      <Box><a href={props.url}>{props.title}</a></Box>
+      <Box>{props.time}</Box>
     </React.Fragment>
   );
 };
