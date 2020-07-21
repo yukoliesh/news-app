@@ -20,35 +20,59 @@ const lightMode_white = "#fff;"
 const grey = "#333";
 
 // Font Weight
-const light = "300";
+// const light = "300";
+const heavy = "600";
 
 // Font Style
 
 // App component
-export const ContentWrapper = styled.div`
-  ${displayflex}
-  min-height: 40vh;
-  padding: 3em;
-  font-family: 'Montserrat', sans-serif;
-`;
-
 export const LightModeBg = styled.div`
-  background-color: ${lightMode_bg_lightblue}
+  ${displayflex}
+  background-color: ${lightMode_bg_lightblue};
+  height: 100vh;
+  padding-top: 2em;
 `;
 
-export const HeaderWrapper = styled.div`
-  width: 50vw;
-  padding: 2em;
+export const LightModeContentWrapper = styled.div`
+  font-family: 'Montserrat', sans-serif;
+  background-color: ${lightMode_white};
+  border-radius: 1.5em 1.5em 0 0;
+  width: 70vw;
+  min-height: 40vh;
+  padding-bottom: 3em;
+`;
+
+export const LightModeHeaderWrapper = styled.div`
+  ${displayflex}
+  background: rgb(65,0,250);
+  background: linear-gradient(144deg, rgba(65,0,250,1) 0%, rgba(124,240,248,1) 100%);
+  border-radius: 1.5em 1.5em 0 0;
+  padding: 4em 5em;
+  height: 350px;
+`;
+export const HeaderCont = styled.div`
+  width: 700px;
 `;
 export const Header = styled.h1`
   font-size: 3em;
   font-style: italic;
-  font-weight: ${light};
-  color: ${lightMode_purple};
+  font-weight: ${heavy};
   text-align: center;
 `;
+export const HeaderTodayText = styled.span`
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px white;
+`;
+export const HeadingLinkStyle = styled(Link)`
+  color: ${lightMode_white};
+  text-decoration: none; 
+  &:hover{
+    color: ${lightMode_white}
+  }
+`;
 export const BorderLine = styled.div`
-  border-bottom: solid 1px ${lightMode_purple};
+  border-bottom: solid 1px ${lightMode_white};
 `;
 
 export const MainWrapper = styled.div`
@@ -84,7 +108,14 @@ export const Box = styled.div`
 export const HeadlinerColBox = styled(Box)`
   width: 100%;
 `;
-
+export const SwitchBox = styled(Box)`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+export const LightModeSwitchLabel = styled.span`
+  color: ${lightMode_white};
+`;
 // Front HeadLiner
 export const LatestHeader = styled.h2`
   background-color: ${lightMode_blue};
@@ -112,7 +143,7 @@ export const HyperLinkStyle = styled.a`
 `;
 
 export const LinkStyle = styled(Link)`
-  color: ${lightMode_purple};
+  color: ${lightMode_white};
   font-weight: 400;
   text-decoration: none; 
   &:hover{
