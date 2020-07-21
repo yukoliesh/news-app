@@ -14,8 +14,8 @@ export const displayflex = css`
 // Common Colors
 const lightMode_bg_lightblue = "#C0E7FE";
 const lightMode_purple = "#5B17B1";
-const lightMode_blue = "#5ACDF1";
-const lightMode_green = "#5AF17C";
+const lightMode_blue = "#313EB0";
+const lightMode_green = "#27793E";
 const lightMode_white = "#fff;"
 const grey = "#333";
 
@@ -77,7 +77,7 @@ export const BorderLine = styled.div`
 
 export const MainWrapper = styled.div`
   ${displayflex}
-  padding-top: 2em; 
+  padding: 2em 4em; 
 `;
 
 // Navlink Component
@@ -107,7 +107,20 @@ export const Box = styled.div`
 `;
 export const HeadlinerColBox = styled(Box)`
   width: 100%;
+
 `;
+
+export const HeadlinerColCont = styled(Box)`
+  background-color:  ${lightMode_white};
+  -webkit-box-shadow: 0px 30px 30px 0px rgba(125,125,125,1);
+  -moz-box-shadow: 0px 30px 30px 0px rgba(125,125,125,1);
+  box-shadow: 0px 30px 30px 0px rgba(125,125,125,1);
+  padding: 1em 2em 2em;
+  border-radius: 1.5em;
+  width: 40%;
+`;
+
+// Switch
 export const SwitchBox = styled(Box)`
   display: flex;
   justify-content: flex-end;
@@ -118,19 +131,17 @@ export const LightModeSwitchLabel = styled.span`
 `;
 // Front HeadLiner
 export const LatestHeader = styled.h2`
-  background-color: ${lightMode_blue};
-  color: ${lightMode_white};
-  padding: 0.5em 1em;
-  border-radius: 0.5em;
-  font-size: 1em;
+  color: ${lightMode_blue};
+  font-size: 1.5em;
+  font-style: italic;
+  font-weight: 600;
 `;
 
 export const PopularHeader = styled.h2`
-  background-color: ${lightMode_green};
-  color: ${lightMode_white};
-  padding: 0.5em 1em;
-  border-radius: 0.3em;
-  font-size: 1em;
+  color: ${lightMode_green};
+  font-size: 1.5em;
+  font-style: italic;
+  font-weight: 600;
 `;
 
 export const HyperLinkStyle = styled.a`

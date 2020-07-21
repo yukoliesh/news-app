@@ -30,7 +30,7 @@ const App = (props) => {
             <BorderLine />
             <NavMenu />
             <SwitchBox>
-              <Switch isOn={value} handleToggle={() => setValue(!value)} />
+              <Switch isOn={value} handleToggle={() => setValue(!value)} onColor="#4100FA" />
             </SwitchBox>
           </HeaderCont>
         </LightModeHeaderWrapper>

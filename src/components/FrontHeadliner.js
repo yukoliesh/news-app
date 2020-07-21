@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { NEWS_QUERY } from '../apollo/query';
 import NewsItem from './NewsItem';
-import { Box, HeadlinerColBox, LatestHeader, PopularHeader }  from '../stylesheet/stylesheet';
+import { HeadlinerColBox, LatestHeader, PopularHeader, HeadlinerColCont, Box }  from '../stylesheet/stylesheet';
 
 const FrontHeadliner = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
@@ -25,19 +25,23 @@ const FrontHeadliner = (props) => {
   // }
 
   return (
-      <HeadlinerColBox row>
-      <Box col={1 / 2} mr={3}> 
+      <HeadlinerColBox row m={3}>
+      <HeadlinerColCont col mr={3} p={2}> 
         <LatestHeader>Latest News</LatestHeader>
+        <Box mt={5}>
         {newStories && limitNewStories.map(item => 
           <NewsItem title={item.title} timeISO={item.timeISO} url={item.url} key={item.id} />
           )}
-      </Box>
-      <Box col >
-        <PopularHeader>Popular News</PopularHeader>
-        {topStories && limitTopStories.map(item => 
-          <NewsItem title={item.title} timeISO={item.timeISO} url={item.url} key={item.id} />
-          )}
-      </Box>
+        </Box>
+      </HeadlinerColCont>
+      <HeadlinerColCont col  p={2}>
+          <PopularHeader>Popular News</PopularHeader>
+          <Box mt={5}>
+          {topStories && limitTopStories.map(item => 
+            <NewsItem title={item.title} timeISO={item.timeISO} url={item.url} key={item.id} />
+            )}
+        </Box>
+      </HeadlinerColCont>
     </HeadlinerColBox>
     
   );
