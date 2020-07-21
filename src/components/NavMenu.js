@@ -1,11 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import LatestNews from "./LatestNews";
 import PopularNews from "./PopularNews";
 import YourFavorite from "./YourFavorite";
 import Bookmark from "./Bookmark";
-import { NavCont, NavItem }  from '../stylesheet/stylesheet';
-
+import { NavCont, NavItem, LinkStyle }  from '../stylesheet/stylesheet';
 
 
 const NavMenu = (props) => {
@@ -14,19 +13,19 @@ const NavMenu = (props) => {
     <Router>
       <NavCont>
         <NavItem>
-          <Link to="/">Home</Link>
+          <LinkStyle to="/">Home</LinkStyle>
         </NavItem>
         <NavItem>
-          <Link to="/LatestNews">Latest News</Link>
+          <LinkStyle to="/LatestNews">Latest News</LinkStyle>
         </NavItem>
         <NavItem>
-          <Link to="/PopularNews">Popular News</Link>
+          <LinkStyle to="/PopularNews">Popular News</LinkStyle>
         </NavItem>
         <NavItem>
-          <Link to="/YourFavorite">Your Favorite</Link>
+          <LinkStyle to="/YourFavorite">Your Favorite</LinkStyle>
         </NavItem>
         <NavItem>
-          <Link to="/Bookmark">Bookmark</Link>
+          <LinkStyle to="/Bookmark">Bookmark</LinkStyle>
         </NavItem>
       </NavCont>
       <Switch>

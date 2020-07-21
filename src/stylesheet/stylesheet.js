@@ -1,5 +1,6 @@
 import styled, { css } from '@xstyled/styled-components';
 import { system } from '@xstyled/system'
+import { Link } from 'react-router-dom';
 
 // Common CSS
 export const displayflex = css`
@@ -15,6 +16,7 @@ const lightMode_purple = "#5B17B1";
 const lightMode_blue = "#5ACDF1";
 const lightMode_green = "#5AF17C";
 const lightMode_white = "#fff;"
+const grey = "#333";
 
 // Font Weight
 const light = "300";
@@ -94,6 +96,15 @@ export const PopularHeader = styled.h2`
   padding: 0.5em 1em;
   border-radius: 0.3em;
   font-size: 1em;
+`;
+
+export const LinkStyle = styled(Link)`
+  color: ${lightMode_purple};
+  font-weight: 400;
+  text-decoration: none; 
+  &:hover{
+    color: ${grey}
+  }
 `;
 
 

@@ -7,20 +7,32 @@ import { Box, HeadlinerColBox, LatestHeader, PopularHeader }  from '../styleshee
 const FrontHeadliner = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
   console.log( { loading, error, data });
-  console.log("data", data.hn);
-  // const topStories = data.hn.topStories;
+  const topStories = data.hn.topStories;
   const newStories = data.hn.newStories;
+
+
+  // let topStoriesTime = data.hn.topStories.map(item => item.timeISO);
+  
+  // const localDateTime = () => {
+  //   const newDate = topStoriesTime.forEach(item => new Date(item));
+  //   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  //   console.log(newDate.toLocaleDateString('de-DE', options));
+   
+  // }
+
   return (
       <HeadlinerColBox row>
       <Box col={1 / 2} mr={3}> 
         <LatestHeader>Latest News</LatestHeader>
         {newStories && newStories.map(item => 
-          <NewsItem title={item.title} time={item.time} url={item.url} />
+          <NewsItem title={item.title} timeISO={item.timeISO} url={item.url} key={item.id} />
           )}
-        
       </Box>
       <Box col >
         <PopularHeader>Popular News</PopularHeader>
+        {topStories && topStories.map(item => 
+          <NewsItem title={item.title} timeISO={item.timeISO} url={item.url} key={item.id} />
+          )}
       </Box>
     </HeadlinerColBox>
     

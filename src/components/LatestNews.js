@@ -6,9 +6,9 @@ const LatestNews = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
   console.log( { loading, error, data });
   return (
-    <div>
+    <React.Fragment>
       <p>This is the latest news</p>
-    </div>
+    </React.Fragment>
   );
 }
 

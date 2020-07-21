@@ -1,17 +1,13 @@
 import React from 'react';
-// import history from '../history';
-import NavMenu  from './NavMenu';
-import { Link } from 'react-router-dom';
-
-import { Header, BorderLine }  from '../stylesheet/stylesheet';
+import FrontHeadliner from "./FrontHeadliner";
+import { MainWrapper }  from '../stylesheet/stylesheet';
 
 const Home = (props) => {
   return (
     <React.Fragment>
-      <Header><Link to="/">Today's Tech News</Link></Header>
-      <BorderLine />
-      <NavMenu />
-      
+      <MainWrapper>
+        <FrontHeadliner />
+      </MainWrapper>
     </React.Fragment>
   );
 }
