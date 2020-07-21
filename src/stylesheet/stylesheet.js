@@ -12,6 +12,7 @@ export const displayflex = css`
 `;
 
 // Common Colors
+const lightMode_bg_lightblue = "#C0E7FE";
 const lightMode_purple = "#5B17B1";
 const lightMode_blue = "#5ACDF1";
 const lightMode_green = "#5AF17C";
@@ -31,6 +32,10 @@ export const ContentWrapper = styled.div`
   font-family: 'Montserrat', sans-serif;
 `;
 
+export const LightModeBg = styled.div`
+  background-color: ${lightMode_bg_lightblue}
+`;
+
 export const HeaderWrapper = styled.div`
   width: 50vw;
   padding: 2em;
@@ -41,7 +46,6 @@ export const Header = styled.h1`
   font-weight: ${light};
   color: ${lightMode_purple};
   text-align: center;
-  padding-bottom: 0.2em;
 `;
 export const BorderLine = styled.div`
   border-bottom: solid 1px ${lightMode_purple};
@@ -96,6 +100,15 @@ export const PopularHeader = styled.h2`
   padding: 0.5em 1em;
   border-radius: 0.3em;
   font-size: 1em;
+`;
+
+export const HyperLinkStyle = styled.a`
+  color: ${lightMode_purple};
+  font-weight: 400;
+  text-decoration: none; 
+  &:hover{
+    color: ${grey}
+  }
 `;
 
 export const LinkStyle = styled(Link)`

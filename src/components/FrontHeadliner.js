@@ -10,6 +10,10 @@ const FrontHeadliner = (props) => {
   const topStories = data.hn.topStories;
   const newStories = data.hn.newStories;
 
+  const limitTopStories = topStories.slice(0, 4);
+  const limitNewStories = newStories.slice(0, 4);
+
+
 
   // let topStoriesTime = data.hn.topStories.map(item => item.timeISO);
   
@@ -24,13 +28,13 @@ const FrontHeadliner = (props) => {
       <HeadlinerColBox row>
       <Box col={1 / 2} mr={3}> 
         <LatestHeader>Latest News</LatestHeader>
-        {newStories && newStories.map(item => 
+        {newStories && limitNewStories.map(item => 
           <NewsItem title={item.title} timeISO={item.timeISO} url={item.url} key={item.id} />
           )}
       </Box>
       <Box col >
         <PopularHeader>Popular News</PopularHeader>
-        {topStories && topStories.map(item => 
+        {topStories && limitTopStories.map(item => 
           <NewsItem title={item.title} timeISO={item.timeISO} url={item.url} key={item.id} />
           )}
       </Box>

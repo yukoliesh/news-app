@@ -1,12 +1,12 @@
 import React from 'react';
-import { Box, LinkStyle }  from '../stylesheet/stylesheet';
+import { Box, HyperLinkStyle }  from '../stylesheet/stylesheet';
 
 
 const NewsItem = (props) => {
   return (
     <Box row mb={4}>
       <Box col={3 / 4} mr={3} >
-        <Box pb={2}><LinkStyle href={props.url}>{props.title}</LinkStyle></Box>
+        <Box pb={2}><HyperLinkStyle href={props.url}>{props.title}</HyperLinkStyle></Box>
         <Box>{props.timeISO}</Box>
       </Box>
       <Box col>
