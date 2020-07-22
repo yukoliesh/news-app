@@ -1,15 +1,21 @@
 import React from 'react';
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 // import { Link } from 'react-router-dom';
 import { NEWS_QUERY } from './apollo/query';
-import Home from "./components/Home";
+// import Home from "./components/Home";
 import NavMenu from "./components/NavMenu";
-import Switch from "./components/Switch/Switch";
-import { LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, RightAlingedBox, HeaderCont }  from './stylesheet/stylesheet';
-
-
 import Loading from "./Loading";
+import FrontHeadliner from "./components/FrontHeadliner";
+import LatestNews from './components/LatestNews';
+import PopularNews from './components/PopularNews';
+import YourFavorite from './components/YourFavorite';
+import Bookmark from './components/Bookmark';
+import ModeToggle from "./components/ModeToggle/ModeToggle";
+import { LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper }  from './stylesheet/stylesheet';
+
+
+
 
 const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
@@ -20,23 +26,35 @@ const App = (props) => {
   if (!data) return <p>Not found</p>;
   
   return (
-    <LightModeBg>
-      <LightModeContentWrapper>
-        <LightModeHeaderWrapper>
-          <HeaderCont>
-            <HeadingLinkStyle to="/">
-              <Header><HeaderTodayText>Today's </HeaderTodayText>Tech News</Header>
-            </HeadingLinkStyle>
-            <BorderLine />
-            <NavMenu />
-            <RightAlingedBox>
-              <Switch isOn={value} handleToggle={() => setValue(!value)} onColor="#4100FA" />
-            </RightAlingedBox>
-          </HeaderCont>
-        </LightModeHeaderWrapper>
-        <Home />
-      </LightModeContentWrapper>
-    </LightModeBg>
+    <Router>
+      <LightModeBg>
+        <LightModeContentWrapper>
+          <LightModeHeaderWrapper>
+            <HeaderCont>
+              <HeadingLinkStyle to="/">
+                <Header><HeaderTodayText>Today's </HeaderTodayText>Tech News</Header>
+              </HeadingLinkStyle>
+              <BorderLine />
+              <NavMenu />
+              <RightAlingedBox>
+                <ModeToggle isOn={value} handleToggle={() => setValue(!value)} onColor="#4100FA" />
+              </RightAlingedBox>
+            </HeaderCont>
+          </LightModeHeaderWrapper>
+          <MainWrapper>
+            <Switch>
+              <Route exact path="/" component={FrontHeadliner} />
+              <Route path="/LatestNews" component={LatestNews} />
+              <Route path="/PopularNews" component={PopularNews} /> 
+              <Route path="/YourFavorite" component={YourFavorite} />
+              <Route path="/Bookmark" component={Bookmark} />
+            </Switch>
+          </MainWrapper>
+        </LightModeContentWrapper>
+      </LightModeBg>
+
+      
+    </Router>
   );
 }
 

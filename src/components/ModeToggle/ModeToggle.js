@@ -1,8 +1,8 @@
 import React from 'react';
-import './Switch.css';
+import './ModeToggle.css';
 import { LightModeSwitchLabel }  from '../../stylesheet/stylesheet';
 
-const Switch = ({isOn, handleToggle, onColor}) => {
+const ModeToggle = ({isOn, handleToggle, onColor}) => {
   return (
     <React.Fragment>
       <LightModeSwitchLabel>Dark Mode</LightModeSwitchLabel>
@@ -24,4 +24,4 @@ const Switch = ({isOn, handleToggle, onColor}) => {
   );
 };
 
-export default Switch;
+export default ModeToggle;

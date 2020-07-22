@@ -29,7 +29,7 @@ const heavy = "600";
 export const LightModeBg = styled.div`
   ${displayflex}
   background-color: ${lightMode_bg_lightblue};
-  height: 100vh;
+  height: 60vh;
   padding-top: 2em;
 `;
 
