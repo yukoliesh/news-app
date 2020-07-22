@@ -111,7 +111,6 @@ export const HeadlinerColBox = styled(Box)`
 `;
 
 export const HeadlinerColCont = styled(Box)`
-  position: relative;
   background-color:  ${lightMode_white};
   -webkit-box-shadow: 0px 30px 30px 0px rgba(125,125,125,1);
   -moz-box-shadow: 0px 30px 30px 0px rgba(125,125,125,1);
@@ -119,6 +118,13 @@ export const HeadlinerColCont = styled(Box)`
   padding: 1em 2em 2em;
   border-radius: 1.5em;
   width: 40%;
+`;
+
+export const NewsTitleEllipsisBox = styled(Box)`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 `;
 
 // Switch
@@ -151,20 +157,13 @@ export const PopularHeader = styled.h2`
   font-weight: 600;
 `;
 
-export const NewsCont = styled(Box)`
-  height: 45%;
-`;
-
 const MoreButtonStyle = css`
   width: 80%;
   border-radius: 2.5em;
-  padding: 2em;
+  padding: 1.5em 2em;
   font-size: 1em;
   text-align: center;
   text-decoration: none;
-  position: absolute;
-  bottom: 1em;
-  left: 2em;
 `;
 
 export const MoreLatestButton = styled(Link)`
