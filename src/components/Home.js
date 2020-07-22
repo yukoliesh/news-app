@@ -4,11 +4,9 @@ import { MainWrapper }  from '../stylesheet/stylesheet';
 
 const Home = (props) => {
   return (
-    <React.Fragment>
-      <MainWrapper>
-        <FrontHeadliner />
-      </MainWrapper>
-    </React.Fragment>
+    <MainWrapper>
+      <FrontHeadliner />
+    </MainWrapper>
   );
 }
 

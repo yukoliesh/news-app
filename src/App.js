@@ -6,7 +6,7 @@ import { NEWS_QUERY } from './apollo/query';
 import Home from "./components/Home";
 import NavMenu from "./components/NavMenu";
 import Switch from "./components/Switch/Switch";
-import { LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, SwitchBox, HeaderCont }  from './stylesheet/stylesheet';
+import { LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, RightAlingedBox, HeaderCont }  from './stylesheet/stylesheet';
 
 
 import Loading from "./Loading";
@@ -29,9 +29,9 @@ const App = (props) => {
             </HeadingLinkStyle>
             <BorderLine />
             <NavMenu />
-            <SwitchBox>
+            <RightAlingedBox>
               <Switch isOn={value} handleToggle={() => setValue(!value)} onColor="#4100FA" />
-            </SwitchBox>
+            </RightAlingedBox>
           </HeaderCont>
         </LightModeHeaderWrapper>
         <Home />

@@ -14,8 +14,8 @@ export const displayflex = css`
 // Common Colors
 const lightMode_bg_lightblue = "#C0E7FE";
 const lightMode_purple = "#5B17B1";
-const lightMode_blue = "#313EB0";
-const lightMode_green = "#27793E";
+const lightMode_latestBlue = "#313EB0";
+const lightMode_popularGreen = "#27793E";
 const lightMode_white = "#fff;"
 const grey = "#333";
 
@@ -121,32 +121,65 @@ export const HeadlinerColCont = styled(Box)`
 `;
 
 // Switch
-export const SwitchBox = styled(Box)`
+export const CenterBox = styled(Box)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const RightAlingedBox = styled(Box)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
 `;
+
 export const LightModeSwitchLabel = styled.span`
   color: ${lightMode_white};
 `;
 // Front HeadLiner
 export const LatestHeader = styled.h2`
-  color: ${lightMode_blue};
+  color: ${lightMode_latestBlue};
   font-size: 1.5em;
   font-style: italic;
   font-weight: 600;
 `;
 
 export const PopularHeader = styled.h2`
-  color: ${lightMode_green};
+  color: ${lightMode_popularGreen};
   font-size: 1.5em;
   font-style: italic;
   font-weight: 600;
 `;
 
+export const NewsCont = styled(Box)`
+  height: 45vh;
+`;
+
+const MoreButtonStyle = css`
+  width: 80%;
+  border-radius: 2.5em;
+  padding: 2em;
+  font-size: 1em;
+  text-align: center;
+  text-decoration: none;
+  
+`;
+
+export const MoreLatestButton = styled(Link)`
+  ${MoreButtonStyle}
+  background-color: ${lightMode_latestBlue};
+  color: ${lightMode_white};
+`;
+export const MorePopularButton = styled(Link)`
+  ${MoreButtonStyle}
+  background-color: ${lightMode_popularGreen};
+  color: ${lightMode_white};
+`;
+
+
+// Link Style
 export const HyperLinkStyle = styled.a`
   color: ${lightMode_purple};
-  font-weight: 400;
+  font-weight: 600;
   text-decoration: none; 
   &:hover{
     color: ${grey}
