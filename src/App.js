@@ -1,9 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
-// import { Link } from 'react-router-dom';
 import { NEWS_QUERY } from './apollo/query';
-// import Home from "./components/Home";
 import NavMenu from "./components/NavMenu";
 import Loading from "./Loading";
 import FrontHeadliner from "./components/FrontHeadliner";
@@ -24,6 +22,12 @@ const App = (props) => {
   if (loading) return <Loading />;
   if (error) return <p>ERROR</p>;
   if (!data) return <p>Not found</p>;
+
+  const topStories = data.hn.topStories;
+  const newStories = data.hn.newStories;
+
+  const limitTopStories = topStories.slice(0, 5);
+  const limitNewStories = newStories.slice(0, 5);
   
   return (
     <Router>
@@ -43,8 +47,12 @@ const App = (props) => {
           </LightModeHeaderWrapper>
           <MainWrapper>
             <Switch>
-              <Route exact path="/" component={FrontHeadliner} />
-              <Route path="/LatestNews" component={LatestNews} />
+              <Route exact path="/">
+                <FrontHeadliner />
+              </Route>
+              <Route path="/LatestNews">
+                <LatestNews  />
+              </Route>
               <Route path="/PopularNews" component={PopularNews} /> 
               <Route path="/YourFavorite" component={YourFavorite} />
               <Route path="/Bookmark" component={Bookmark} />

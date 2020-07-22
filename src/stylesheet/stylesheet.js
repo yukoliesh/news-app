@@ -197,5 +197,25 @@ export const LinkStyle = styled(Link)`
   }
 `;
 
+// Your Favorite icon
+export const HeartIcon = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+ .ripple{
+    background-position: center;
+    transition: background 0.8s;
+    &:hover{
+      background: #ff0000 radial-gradient(circle, transparent 1%, #ff0000 1%) center/15000%;
+    }
+    &:hover{
+      background-color: #6eb9f7;
+      background-size: 100%;
+      transition: background 0s;
+    }
+ }
 
+
+`;
 
