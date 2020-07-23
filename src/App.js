@@ -23,11 +23,6 @@ const App = (props) => {
   if (error) return <p>ERROR</p>;
   if (!data) return <p>Not found</p>;
 
-  const topStories = data.hn.topStories;
-  const newStories = data.hn.newStories;
-
-  const limitTopStories = topStories.slice(0, 5);
-  const limitNewStories = newStories.slice(0, 5);
   
   return (
     <Router>

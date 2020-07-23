@@ -13,10 +13,10 @@ const NewsItem = (props) => {
         <Box>{props.timeISO}</Box>
       </Box>
       <Box col>
-        <HeartIcon onClick={handleFavorite}><i className="fa fa-heart-o fa-lg"></i></HeartIcon>
+        <HeartIcon onClick={onFavoriteClick}><i className="fa fa-heart-o fa-lg"></i></HeartIcon>
       </Box>
       <Box col>
-        <div><i className="fa fa-bookmark-o fa-lg"></i></div>
+        <div onClick={onBookmarkClick}><i className="fa fa-bookmark-o fa-lg"></i></div>
       </Box>
     </Box>
 
