@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { NEWS_QUERY } from './apollo/query';
 import NavMenu from "./components/NavMenu";
 import Loading from "./Loading";
+import ErrorPage from "./ErrorPage";
 import FrontHeadliner from "./components/FrontHeadliner";
 import LatestNews from './components/LatestNews';
 import PopularNews from './components/PopularNews';
@@ -20,7 +21,10 @@ const App = (props) => {
   const [value, setValue] = React.useState(false);
   console.log( { loading, error, data });
   if (loading) return <Loading />;
-  if (error) return <p>ERROR</p>;
+  if (error) {
+    console.log(error);
+    return <ErrorPage />;
+  }
   if (!data) return <p>Not found</p>;
 
   

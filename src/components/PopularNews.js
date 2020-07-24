@@ -9,20 +9,12 @@ import { Box, PopularHeader }  from '../stylesheet/stylesheet';
 
 const PopularNews = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
+  const [favorites, setFavorites] = useLocalStorage('favorites', [])
   console.log(loading, error, data);
   // const [isLoading, setIsLoading] = React.useState(true);
   // const [isError, setIsError] = React.useState(true);
-  
-  
-  const [liked, setLiked] = useLocalStorage('liked', 'test');
-  const [bookmarked, setBookmarked] = useLocalStorage('bookmarked', 'test2');
-
-  console.log('liked', liked);
-  console.log('bookmarked', bookmarked);
-
-  const onLikedClick = (e) => {
-    const id = e.target.id;
-    setLiked(id);
+  const addFavorite = (postId) => {
+    setFavorites([...favorites, postId])
   }
 
   if (loading) return <Loading />;
@@ -31,8 +23,12 @@ const PopularNews = (props) => {
     return <ErrorPage />;
   } 
   if (!data) return <p>Not found</p>;
-
+  
   const topStories = data.hn.topStories;
+  const formatDate = (timeISO) => {
+    return `${timeISO.split("T")[0]} ${timeISO.split("T")[1]}` 
+  }
+  console.log(formatDate)
 
   return (
     <React.Fragment>
@@ -42,11 +38,11 @@ const PopularNews = (props) => {
           <NewsItem 
             id={item.id}
             title={item.title} 
-            timeISO={item.timeISO} 
+            timeISO={formatDate(item.timeISO)} 
             url={item.url} 
             key={item.id} 
-            onFavoriteClick={onLikedClick} 
-            onBookmarkClick={e => setBookmarked(e.target.id)} />
+            onFavoriteClick={() => addFavorite(item.id)} 
+            onBookmarkClick={e => addFavorite(item.id)} />
         )}
       </Box>
     </React.Fragment>
