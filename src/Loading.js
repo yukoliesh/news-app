@@ -1,10 +1,19 @@
 import React from 'react';
+import { LoadingStyle }  from './stylesheet/stylesheet';
+
 
 const Loading = (props) => {
   return (
-    <div>
-      <p>Loading...</p>
-    </div>
+    <React.Fragment>
+      <LoadingStyle>
+        <div className="lds-ellipsis">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </LoadingStyle>
+    </React.Fragment>
   );
 }
 

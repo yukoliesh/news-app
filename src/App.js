@@ -8,7 +8,7 @@ import FrontHeadliner from "./components/FrontHeadliner";
 import LatestNews from './components/LatestNews';
 import PopularNews from './components/PopularNews';
 import YourFavorite from './components/YourFavorite';
-import Bookmark from './components/Bookmark';
+import Bookmarks from './components/Bookmarks';
 import ModeToggle from "./components/ModeToggle/ModeToggle";
 import { LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper }  from './stylesheet/stylesheet';
 
@@ -50,7 +50,7 @@ const App = (props) => {
               </Route>
               <Route path="/PopularNews" component={PopularNews} /> 
               <Route path="/YourFavorite" component={YourFavorite} />
-              <Route path="/Bookmark" component={Bookmark} />
+              <Route path="/Bookmarks" component={Bookmarks} />
             </Switch>
           </MainWrapper>
         </LightModeContentWrapper>
