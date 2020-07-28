@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, HyperLinkStyle, NewsTitleEllipsisBox, HeartIcon }  from '../stylesheet/stylesheet';
+import { Box, HyperLinkStyle, NewsTitleEllipsisBox, HeartIcon, ReadLaterIcon }  from '../stylesheet/stylesheet';
 
 
 const NewsItem = (props) => {
@@ -19,9 +19,9 @@ const NewsItem = (props) => {
         </HeartIcon>
       </Box>
       <Box col>
-        <div onClick={props.onBookmarkClick}>
+        <ReadLaterIcon onClick={props.onBookmarkClick}>
           <i id={props.id} className="fa fa-bookmark-o fa-lg"></i>
-        </div>
+        </ReadLaterIcon>
       </Box>
     </Box>
 

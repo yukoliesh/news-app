@@ -9,16 +9,17 @@ import FrontHeadliner from "./components/FrontHeadliner";
 import LatestNews from './components/LatestNews';
 import PopularNews from './components/PopularNews';
 import YourFavorite from './components/YourFavorite';
-import Bookmarks from './components/Bookmarks';
+import ReadLater from './components/ReadLater';
 import ModeToggle from "./components/ModeToggle/ModeToggle";
+import { useLocalStorage } from './hooks/useLocalStorage';
 import { LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper }  from './stylesheet/stylesheet';
-
-
-
 
 const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
   const [value, setValue] = React.useState(false);
+  const [favorites, setFavorites] = useLocalStorage('favorites', []);
+  const [readlaters, setReadLaters] = useLocalStorage('readlaters', []);
+
   console.log( { loading, error, data });
   if (loading) return <Loading />;
   if (error) {
@@ -27,6 +28,27 @@ const App = (props) => {
   }
   if (!data) return <p>Not found</p>;
 
+  // Getting the stories
+  const popularStories = data.hn.topStories;
+
+  // Format Date and time
+  const formatDate = (timeISO) => {
+    const date = timeISO.split("T")[0];
+    const timeSplit = timeISO.split("."[0]);
+    const time = timeSplit[0].split("T")[1];
+    // return `${timeISO.split("T")[0]} ${timeISO.split(".")[0]}` 
+    return date + " " + time;
+  }
+
+  // Adding postId to localStorage
+  const addFavorite = (postId) => {
+    console.log("add fav", favorites);
+    setFavorites([...favorites, postId]);
+  }
+
+  const addReadLaters = (postId) => {
+    setReadLaters([...readlaters, postId])
+  }
   
   return (
     <Router>
@@ -52,15 +74,28 @@ const App = (props) => {
               <Route path="/LatestNews">
                 <LatestNews  />
               </Route>
-              <Route path="/PopularNews" component={PopularNews} /> 
-              <Route path="/YourFavorite" component={YourFavorite} />
-              <Route path="/Bookmarks" component={Bookmarks} />
+              <Route path="/PopularNews">
+              {popularStories && popularStories.map(item => 
+                <PopularNews 
+                  popularId={item.id}
+                  popularNewsTitle={item.title}
+                  popularTime={formatDate(item.timeISO)}
+                  popularUrl={item.url} 
+                  key={item.id} 
+                  onFavoriteClick={() => addFavorite(item.id)} 
+                  onBookmarkClick={() => addReadLaters(item.id)}  />
+              )}
+              </Route> 
+              <Route path="/YourFavorite">
+                <YourFavorite />
+              </Route>
+              <Route path="/ReadLater">
+                <ReadLater />
+              </Route>
             </Switch>
           </MainWrapper>
         </LightModeContentWrapper>
       </LightModeBg>
-
-      
     </Router>
   );
 }

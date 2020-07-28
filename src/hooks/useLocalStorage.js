@@ -20,18 +20,5 @@ export const useLocalStorage = (key, initialValue) => {
       console.log(error);
     }
   };
-
-  // const retrievedData =  window.localStorage.getItem(key);
-  // console.log("retrieved", retrievedData);
-  // let newStoreArray;
-  // const dataString = JSON.parse(retrievedData);
-  // console.log("dataString", dataString);
-  // newStoreArray = dataString.push(dataString);
-  // newStoreArray = [...dataString, dataString];
-  
-
-  // console.log("store", newStoreArray);
-
-
   return [storedValue, setValue];
 }

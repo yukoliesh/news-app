@@ -18,7 +18,7 @@ const NavMenu = (props) => {
           <LinkStyle to="/YourFavorite">Your Favorite</LinkStyle>
         </NavItem>
         <NavItem>
-          <LinkStyle to="/Bookmarks">Bookmarks</LinkStyle>
+          <LinkStyle to="/ReadLater">Read Later</LinkStyle>
         </NavItem>
       </NavCont>
   );

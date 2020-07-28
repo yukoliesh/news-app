@@ -17,6 +17,7 @@ const lightMode_purple = "#5B17B1";
 const lightMode_latestBlue = "#313EB0";
 const lightMode_popularGreen = "#27793E";
 const lightMode_white = "#fff;"
+const lightMode_favorite = "#d91cc3";
 const grey = "#333";
 
 // Font Weight
@@ -284,7 +285,19 @@ export const HeartIcon = styled.button`
       transition: background 0s;
     }
  }
-
-
+`;
+// Read Later icon
+export const ReadLaterIcon = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  &:active{
+    color: #ff0000;
+  }
 `;
 
+// Your Favorite page
+export const FavoriteHeader = styled.div`
+  color: ${lightMode_favorite};
+`;

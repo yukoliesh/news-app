@@ -14,23 +14,22 @@ const FrontHeadliner = (props) => {
   const limitNewStories = newStories.slice(0, 5);
 
 
-
-  // let topStoriesTime = data.hn.topStories.map(item => item.timeISO);
+   // Format Date and time
+   const formatDate = (timeISO) => {
+    const date = timeISO.split("T")[0];
+    const timeSplit = timeISO.split("."[0]);
+    const time = timeSplit[0].split("T")[1];
+    // return `${timeISO.split("T")[0]} ${timeISO.split(".")[0]}` 
+    return date + " " + time;
+  }
   
-  // const localDateTime = () => {
-  //   const newDate = topStoriesTime.forEach(item => new Date(item));
-  //   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  //   console.log(newDate.toLocaleDateString('de-DE', options));
-   
-  // }
-
   return (
       <HeadlinerColBox row m={3}>
       <HeadlinerColCont col mr={3} p={2}> 
         <LatestHeader>Latest News</LatestHeader>
         <Box mt={5} pb={4}>
         {newStories && limitNewStories.map(item => 
-          <NewsItem title={item.title} timeISO={item.timeISO} url={item.url} key={item.id} />
+          <NewsItem title={item.title} timeISO={formatDate(item.timeISO)} url={item.url} key={item.id} />
           )}
         </Box>
         <CenterBox mt={5} mb={3}>
@@ -41,7 +40,7 @@ const FrontHeadliner = (props) => {
         <PopularHeader>Popular News</PopularHeader>
         <Box mt={5} pb={4}>
         {topStories && limitTopStories.map(item => 
-          <NewsItem title={item.title} timeISO={item.timeISO} url={item.url} key={item.id} />
+          <NewsItem title={item.title} timeISO={formatDate(item.timeISO)} url={item.url} key={item.id} />
           )}
         </Box>
         <CenterBox mt={5} mb={3}>
