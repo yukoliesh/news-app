@@ -47,10 +47,18 @@ const App = (props) => {
     setFavorites([...favorites, postId]);
   }
 
+  // Create a new set of Favorite List
+  const uniqueFavorite = (arr) => {
+    return Array.from(new Set(arr));
+  }
   // Creating a new array with objects from Favorites array
-  // const newFavoriteArray = () => {
-
-  // }
+  const newFavoriteArray = () => {
+    const uniqueFavs = uniqueFavorite(favorites);
+    console.log('uniq', uniqueFavs);
+    const favlists = favorites.filter(list => list.id );
+    console.log("list", favlists);
+  }
+  newFavoriteArray();
 
   const addReadLaters = (postId) => {
     console.log("add readlaters", readlaters);
