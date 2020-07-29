@@ -12,7 +12,7 @@ import YourFavorite from './components/YourFavorite';
 import ReadLater from './components/ReadLater';
 import ModeToggle from "./components/ModeToggle/ModeToggle";
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper, PopularHeader, LatestHeader }  from './stylesheet/stylesheet';
+import { LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper, PopularHeader, LatestHeader, HeadlinerColBox }  from './stylesheet/stylesheet';
 
 const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
@@ -47,7 +47,13 @@ const App = (props) => {
     setFavorites([...favorites, postId]);
   }
 
+  // Creating a new array with objects from Favorites array
+  // const newFavoriteArray = () => {
+
+  // }
+
   const addReadLaters = (postId) => {
+    console.log("add readlaters", readlaters);
     setReadLaters([...readlaters, postId])
   }
   
@@ -73,30 +79,34 @@ const App = (props) => {
                 <FrontHeadliner />
               </Route>
               <Route path="/LatestNews">
-                <LatestHeader>Latest News</LatestHeader>
-                {newStories && newStories.map(item => 
-                <LatestNews 
-                popularId={item.id}
-                popularNewsTitle={item.title}
-                popularTime={formatDate(item.timeISO)}
-                popularUrl={item.url} 
-                key={item.id} 
-                onFavoriteClick={() => addFavorite(item.id)} 
-                onBookmarkClick={() => addReadLaters(item.id)}  /> 
-                )}
+                <HeadlinerColBox>
+                  <LatestHeader>Latest News</LatestHeader>
+                  {newStories && newStories.map(item => 
+                    <LatestNews 
+                      latestNewsId={item.id}
+                      latestNewsTitle={item.title}
+                      latestTime={formatDate(item.timeISO)}
+                      latestUrl={item.url}
+                      key={item.id} 
+                      onFavoriteClick={() => addFavorite(item.id)} 
+                      onBookmarkClick={() => addReadLaters(item.id)}  /> 
+                    )}
+                </HeadlinerColBox>
               </Route>
               <Route path="/PopularNews">
-              <PopularHeader>Popular News</PopularHeader>
-              {popularStories && popularStories.map(item => 
-                <PopularNews 
-                  popularId={item.id}
-                  popularNewsTitle={item.title}
-                  popularTime={formatDate(item.timeISO)}
-                  popularUrl={item.url} 
-                  key={item.id} 
-                  onFavoriteClick={() => addFavorite(item.id)} 
-                  onBookmarkClick={() => addReadLaters(item.id)}  />
-              )}
+               <HeadlinerColBox>
+                  <PopularHeader>Popular News</PopularHeader>
+                  {popularStories && popularStories.map(item => 
+                    <PopularNews 
+                      popularId={item.id}
+                      popularNewsTitle={item.title}
+                      popularTime={formatDate(item.timeISO)}
+                      popularUrl={item.url} 
+                      key={item.id} 
+                      onFavoriteClick={() => addFavorite(item.id)} 
+                      onBookmarkClick={() => addReadLaters(item.id)}  />
+                  )}
+                </HeadlinerColBox>
               </Route> 
               <Route path="/YourFavorite">
                 <YourFavorite />

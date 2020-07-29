@@ -16,17 +16,16 @@ const LatestNews = (props) => {
   } 
   if (!data) return <p>Not found</p>;
 
-    
   return (
     <Box>
       <NewsItem 
-      id={props.popularId}
-      title={props.popularNewsTitle} 
-      timeISO={props.popularTime} 
-      url={props.popularUrl} 
-      key={props.popularKey} 
-      onFavoriteClick={props.popularClick} 
-      onBookmarkClick={props.readLaterClick} />
+        id={props.latestNewsId}
+        title={props.latestNewsTitle} 
+        timeISO={props.latestTime} 
+        url={props.latestUrl} 
+        key={props.latestKey} 
+        onFavoriteClick={props.onFavoriteClick} 
+        onBookmarkClick={props.onBookmarkClick} />
     </Box>
   );
 }

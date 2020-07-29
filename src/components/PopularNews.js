@@ -5,7 +5,7 @@ import NewsItem from './NewsItem';
 import Loading from '../Loading';
 import ErrorPage from '../ErrorPage';
 
-import { Box, PopularHeader }  from '../stylesheet/stylesheet';
+import { Box }  from '../stylesheet/stylesheet';
 
 const PopularNews = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
@@ -19,18 +19,16 @@ const PopularNews = (props) => {
   if (!data) return <p>Not found</p>;
 
   return (
-    <React.Fragment>
-      <Box>
-          <NewsItem 
-            id={props.popularId}
-            title={props.popularNewsTitle} 
-            timeISO={props.popularTime} 
-            url={props.popularUrl} 
-            key={props.popularKey} 
-            onFavoriteClick={props.popularClick} 
-            onBookmarkClick={props.readLaterClick} />
-      </Box>
-    </React.Fragment>
+    <Box>
+      <NewsItem 
+        id={props.popularId}
+        title={props.popularNewsTitle} 
+        timeISO={props.popularTime} 
+        url={props.popularUrl} 
+        key={props.popularKey} 
+        onFavoriteClick={props.onFavoriteClick} 
+        onBookmarkClick={props.onBookmarkClick} />
+    </Box>
   );
 }
 
