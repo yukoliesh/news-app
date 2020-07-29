@@ -51,14 +51,40 @@ const App = (props) => {
   const uniqueFavorite = (arr) => {
     return Array.from(new Set(arr));
   }
+
+  const uniqueFavs = uniqueFavorite(favorites);
+    const setId = (item) => {
+      const full = "id: " + item;
+      return full;
+    }
+    const outputId = uniqueFavs.map(setId);
+    console.log('uniq', outputId);
+
+  const newFav = ['id', 'url'];
+
+  const newFavArr = popularStories.filter(function(o1){
+    return favorites.some(function(o2){
+      return o1.id === o2.id;
+    });
+  }).map(function(o){
+    return newFav.reduce(function(newo, url){
+      newo[url] = o[url];
+      return newo;
+    }, {});
+  })
+  console.log("newFav", newFavArr);
+
+ 
   // Creating a new array with objects from Favorites array
-  const newFavoriteArray = () => {
-    const uniqueFavs = uniqueFavorite(favorites);
-    console.log('uniq', uniqueFavs);
-    const favlists = favorites.filter(list => list.id );
-    console.log("list", favlists);
-  }
-  newFavoriteArray();
+  // const newFavoriteArray = () => {
+    
+
+    // const uqListItem = uniqueFavLists.map(uqItem => uqItem.id)
+    // console.log("uqlistitem", uqListItem);
+    // const favlists = favorites.filter(list => list.id === uqListItem);
+    // console.log("list", favlists);
+  // }
+  // newFavoriteArray();
 
   const addReadLaters = (postId) => {
     console.log("add readlaters", readlaters);
