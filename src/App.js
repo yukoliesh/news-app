@@ -12,7 +12,7 @@ import YourFavorite from './components/YourFavorite';
 import ReadLater from './components/ReadLater';
 import ModeToggle from "./components/ModeToggle/ModeToggle";
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper }  from './stylesheet/stylesheet';
+import { LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper, PopularHeader, LatestHeader }  from './stylesheet/stylesheet';
 
 const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
@@ -30,6 +30,7 @@ const App = (props) => {
 
   // Getting the stories
   const popularStories = data.hn.topStories;
+  const newStories = data.hn.newStories;
 
   // Format Date and time
   const formatDate = (timeISO) => {
@@ -72,9 +73,20 @@ const App = (props) => {
                 <FrontHeadliner />
               </Route>
               <Route path="/LatestNews">
-                <LatestNews  />
+                <LatestHeader>Latest News</LatestHeader>
+                {newStories && newStories.map(item => 
+                <LatestNews 
+                popularId={item.id}
+                popularNewsTitle={item.title}
+                popularTime={formatDate(item.timeISO)}
+                popularUrl={item.url} 
+                key={item.id} 
+                onFavoriteClick={() => addFavorite(item.id)} 
+                onBookmarkClick={() => addReadLaters(item.id)}  /> 
+                )}
               </Route>
               <Route path="/PopularNews">
+              <PopularHeader>Popular News</PopularHeader>
               {popularStories && popularStories.map(item => 
                 <PopularNews 
                   popularId={item.id}

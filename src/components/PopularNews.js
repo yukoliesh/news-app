@@ -21,7 +21,6 @@ const PopularNews = (props) => {
   return (
     <React.Fragment>
       <Box>
-        <PopularHeader>Popular News</PopularHeader>
           <NewsItem 
             id={props.popularId}
             title={props.popularNewsTitle} 
