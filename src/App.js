@@ -52,6 +52,7 @@ const App = (props) => {
     return Array.from(new Set(arr));
   }
 
+  // Adding the key "id" to the value
   const uniqueFavs = uniqueFavorite(favorites);
     const setId = (item) => {
       const full = "id: " + item;
@@ -60,8 +61,11 @@ const App = (props) => {
     const outputId = uniqueFavs.map(setId);
     console.log('uniq', outputId);
 
+  // Create a new array
   const newFav = ['id', 'url'];
 
+  // Comparing two arrays - original array and current "favorites" array and get a new list of array with
+  // its url (planning to add title, and timeISO)
   const newFavArr = popularStories.filter(function(o1){
     return favorites.some(function(o2){
       return o1.id === o2.id;
