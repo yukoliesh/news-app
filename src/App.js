@@ -12,7 +12,7 @@ import YourFavorite from './components/YourFavorite';
 import ReadLater from './components/ReadLater';
 import ModeToggle from "./components/ModeToggle/ModeToggle";
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper, PopularHeader, LatestHeader, HeadlinerColBox }  from './stylesheet/stylesheet';
+import { LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper, PopularHeader, LatestHeader, HeadlinerColBox, FavoriteHeader }  from './stylesheet/stylesheet';
 
 const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
@@ -46,54 +46,45 @@ const App = (props) => {
     console.log("add fav", favorites);
     setFavorites([...favorites, postId]);
   }
-
-  // Create a new set of Favorite List
-  const uniqueFavorite = (arr) => {
-    return Array.from(new Set(arr));
-  }
-
-  // Adding the key "id" to the value
-  const uniqueFavs = uniqueFavorite(favorites);
-    const setId = (item) => {
-      const full = "id: " + item;
-      return full;
-    }
-    const outputId = uniqueFavs.map(setId);
-    console.log('uniq', outputId);
-
-  // Create a new array
-  const newFav = ['id', 'url'];
-
-  // Comparing two arrays - original array and current "favorites" array and get a new list of array with
-  // its url (planning to add title, and timeISO)
-  const newFavArr = popularStories.filter(function(o1){
-    return favorites.some(function(o2){
-      return o1.id === o2.id;
-    });
-  }).map(function(o){
-    return newFav.reduce(function(newo, url){
-      newo[url] = o[url];
-      return newo;
-    }, {});
-  })
-  console.log("newFav", newFavArr);
-
- 
-  // Creating a new array with objects from Favorites array
-  // const newFavoriteArray = () => {
-    
-
-    // const uqListItem = uniqueFavLists.map(uqItem => uqItem.id)
-    // console.log("uqlistitem", uqListItem);
-    // const favlists = favorites.filter(list => list.id === uqListItem);
-    // console.log("list", favlists);
-  // }
-  // newFavoriteArray();
-
   const addReadLaters = (postId) => {
     console.log("add readlaters", readlaters);
     setReadLaters([...readlaters, postId])
   }
+
+  // Create a new set of Favorite List
+  const removeDuplicates = (arr) => {
+    return Array.from(new Set(arr));
+  }
+  const uniqueFavorite = removeDuplicates(favorites);
+  const uniqueReadLaters = removeDuplicates(readlaters);
+  
+  // Remove undefined if there is any
+  const removeUndefined = (item) => {
+    return item.filter(x => x !== undefined)
+  }
+ 
+
+  const favObjsFromNewStories = uniqueFavorite.map(id => newStories.find(obj => obj.id === id));
+  const favObjsFromPopStories = uniqueFavorite.map(id => popularStories.find(obj => obj.id === id));
+
+  // const filteredFavs = favObjsFromNewStories.filter(x => x !== undefined);
+
+  const cleanFavsNewSt = removeUndefined(favObjsFromNewStories);
+  const cleanFavsPopSt = removeUndefined(favObjsFromPopStories);
+  const childrenFavs = cleanFavsNewSt.concat(cleanFavsPopSt);
+  console.log("clean", childrenFavs);
+
+
+  const readLaterObjsFromNewStories = uniqueReadLaters.map(id => newStories.find(obj => obj.id === id));
+  const readLaterObjsFromPopStories = uniqueReadLaters.map(id => popularStories.find(obj => obj.id === id));
+  const childrenReadLaters = readLaterObjsFromNewStories.concat(readLaterObjsFromPopStories);
+  console.log("favObjsFromNewStories", favObjsFromNewStories);
+  console.log("favObjsFromPopStories", favObjsFromPopStories);
+  // console.log("fav", childrenFavs);
+  console.log("filtered", uniqueFavorite);
+  console.log("read laters", childrenReadLaters);
+
+
   
   return (
     <Router>
@@ -147,7 +138,8 @@ const App = (props) => {
                 </HeadlinerColBox>
               </Route> 
               <Route path="/YourFavorite">
-                <YourFavorite />
+                <FavoriteHeader>Your Favorite</FavoriteHeader>
+                
               </Route>
               <Route path="/ReadLater">
                 <ReadLater />
