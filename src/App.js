@@ -55,34 +55,27 @@ const App = (props) => {
   const removeDuplicates = (arr) => {
     return Array.from(new Set(arr));
   }
-  const uniqueFavorite = removeDuplicates(favorites);
-  const uniqueReadLaters = removeDuplicates(readlaters);
-  
   // Remove undefined if there is any
   const removeUndefined = (item) => {
     return item.filter(x => x !== undefined)
   }
- 
-
+  // For Your Favorite Page
+  const uniqueFavorite = removeDuplicates(favorites);
   const favObjsFromNewStories = uniqueFavorite.map(id => newStories.find(obj => obj.id === id));
   const favObjsFromPopStories = uniqueFavorite.map(id => popularStories.find(obj => obj.id === id));
-
-  // const filteredFavs = favObjsFromNewStories.filter(x => x !== undefined);
-
   const cleanFavsNewSt = removeUndefined(favObjsFromNewStories);
   const cleanFavsPopSt = removeUndefined(favObjsFromPopStories);
   const childrenFavs = cleanFavsNewSt.concat(cleanFavsPopSt);
-  console.log("clean", childrenFavs);
 
-
+  // For Read Later Page
+  const uniqueReadLaters = removeDuplicates(readlaters);
   const readLaterObjsFromNewStories = uniqueReadLaters.map(id => newStories.find(obj => obj.id === id));
   const readLaterObjsFromPopStories = uniqueReadLaters.map(id => popularStories.find(obj => obj.id === id));
-  const childrenReadLaters = readLaterObjsFromNewStories.concat(readLaterObjsFromPopStories);
-  console.log("favObjsFromNewStories", favObjsFromNewStories);
-  console.log("favObjsFromPopStories", favObjsFromPopStories);
-  // console.log("fav", childrenFavs);
-  console.log("filtered", uniqueFavorite);
-  console.log("read laters", childrenReadLaters);
+  const cleanReadLaterNewSt = removeUndefined(readLaterObjsFromNewStories);
+  const cleanReadLaterPopSt = removeUndefined(readLaterObjsFromPopStories);
+  const childrenReadLater = cleanReadLaterNewSt.concat(cleanReadLaterPopSt);
+
+  console.log("read laters", childrenReadLater);
 
 
   
@@ -138,10 +131,20 @@ const App = (props) => {
                 </HeadlinerColBox>
               </Route> 
               <Route path="/YourFavorite">
-                <FavoriteHeader>Your Favorite</FavoriteHeader>
-                
+                <HeadlinerColBox>
+                  <FavoriteHeader>Your Favorite</FavoriteHeader>
+                  {childrenFavs && childrenFavs.map(item => 
+                    <YourFavorite key={item.id} favoriteId={item.id} favoriteUrl={item.url} favoriteTitle={item.title} favoriteTimeISO={formatDate(item.timeISO)} />
+                  )}
+                </HeadlinerColBox>
               </Route>
               <Route path="/ReadLater">
+                <HeadlinerColBox>
+                  <FavoriteHeader>Read Later</FavoriteHeader>
+                  {childrenReadLater && childrenReadLater.map(item =>
+                    <ReadLater key={item.id} readLaterId={item.id} readLaterUrl={item.url} readLaterTitle={item.title} readLaterTimeISO={formatDate(item.timeISO)} />
+                  )}
+                </HeadlinerColBox>
                 <ReadLater />
               </Route>
             </Switch>

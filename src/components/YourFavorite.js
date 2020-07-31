@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { NEWS_QUERY } from '../apollo/query';
 import Loading from '../Loading';
 import ErrorPage from '../ErrorPage';
-import { Box, HyperLinkStyle }  from '../stylesheet/stylesheet';
+import { Box, HyperLinkStyle, SavedItems, SavedItem }  from '../stylesheet/stylesheet';
 
 
 const YourFavorite = (props) => {
@@ -19,12 +19,14 @@ const YourFavorite = (props) => {
 
   return (
     <React.Fragment>
-      <Box>
-        <HyperLinkStyle id={props.favoriteId} href={props.favoriteUrl} target="_blank">
-          {props.favoriteTitle}
-        </HyperLinkStyle>
-        <Box>{props.favoriteTimeISO}</Box>
-      </Box>
+      <SavedItems>
+        <SavedItem>
+          <HyperLinkStyle id={props.favoriteId} href={props.favoriteUrl} target="_blank">
+            {props.favoriteTitle}
+          </HyperLinkStyle>
+          <Box>{props.favoriteTimeISO}</Box>
+        </SavedItem>
+      </SavedItems>
     </React.Fragment>
   );
 }

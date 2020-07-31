@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { NEWS_QUERY } from '../apollo/query';
 import Loading from '../Loading';
 import ErrorPage from '../ErrorPage';
-import { Box, FavoriteHeader, HyperLinkStyle }  from '../stylesheet/stylesheet';
+import { Box, HyperLinkStyle, SavedItem, SavedItems }  from '../stylesheet/stylesheet';
 
 const ReadLater = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
@@ -18,13 +18,14 @@ const ReadLater = (props) => {
   if (!data) return <p>Not found</p>;
   return (
     <React.Fragment>
-      <Box>
-        <FavoriteHeader>Read Later</FavoriteHeader>
-        <HyperLinkStyle id={props.id} href={props.url} target="_blank">
-          {props.title}
-        </HyperLinkStyle>
-        <Box>{props.timeISO}</Box>
-      </Box>
+      <SavedItems>
+        <SavedItem>
+          <HyperLinkStyle id={props.readLaterId} href={props.readLaterUrl} target="_blank">
+            {props.readLaterTitle}
+          </HyperLinkStyle>
+          <Box>{props.readLaterTimeISO}</Box>
+          </SavedItem>
+      </SavedItems>
     </React.Fragment>
   );
 }

@@ -301,3 +301,13 @@ export const ReadLaterIcon = styled.button`
 export const FavoriteHeader = styled.div`
   color: ${lightMode_favorite};
 `;
+
+export const SavedItems = styled.ol`
+  margin-left: 0;
+  padding-left: 0;
+  list-style-type: decimal-leading-zero;
+`;
+export const SavedItem = styled.li`
+  list-style: none;
+  line-height: 1.5
+`;
