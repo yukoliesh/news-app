@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { NEWS_QUERY } from '../apollo/query';
 import Loading from '../Loading';
 import ErrorPage from '../ErrorPage';
-import { Box, HyperLinkStyle, SavedItems, SavedItem }  from '../stylesheet/stylesheet';
+import { Box, HyperLinkStyle, SavedItems, SavedItem }  from '../styles/light_style';
 
 
 const YourFavorite = (props) => {

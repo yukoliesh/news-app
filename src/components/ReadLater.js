@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { NEWS_QUERY } from '../apollo/query';
 import Loading from '../Loading';
 import ErrorPage from '../ErrorPage';
-import { Box, HyperLinkStyle, SavedItem, SavedItems }  from '../stylesheet/stylesheet';
+import { Box, HyperLinkStyle, SavedItem, SavedItems }  from '../styles/light_style';
 
 const ReadLater = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);

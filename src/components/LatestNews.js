@@ -4,7 +4,7 @@ import { NEWS_QUERY } from '../apollo/query';
 import NewsItem from './NewsItem';
 import Loading from '../Loading';
 import ErrorPage from '../ErrorPage';
-import { Box }  from '../stylesheet/stylesheet';
+import { Box }  from '../styles/light_style';
 
 const LatestNews = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, HyperLinkStyle, NewsTitleEllipsisBox, HeartIcon, ReadLaterIcon }  from '../stylesheet/stylesheet';
+import { Box, HyperLinkStyle, NewsTitleEllipsisBox, HeartIcon, ReadLaterIcon }  from '../styles/light_style';
 
 
 const NewsItem = (props) => {

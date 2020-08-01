@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ThemeProvider } from '@xstyled/styled-components';
+import { lightTheme, darkTheme } from './styles/global';
 import { useQuery } from '@apollo/react-hooks';
 import { NEWS_QUERY } from './apollo/query';
 import NavMenu from "./components/NavMenu";
@@ -12,13 +14,14 @@ import YourFavorite from './components/YourFavorite';
 import ReadLater from './components/ReadLater';
 import ModeToggle from "./components/ModeToggle/ModeToggle";
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper, PopularHeader, LatestHeader, HeadlinerColBox, FavoriteHeader }  from './stylesheet/stylesheet';
+import { GlobalStyles, LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper, PopularHeader, LatestHeader, HeadlinerColBox, FavoriteHeader }  from './styles/light_style';
 
 const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
-  const [value, setValue] = React.useState(false);
+  // const [value, setValue] = React.useState(false);
   const [favorites, setFavorites] = useLocalStorage('favorites', []);
   const [readlaters, setReadLaters] = useLocalStorage('readlaters', []);
+  const [theme, setTheme] = React.useState('light');
 
   console.log( { loading, error, data });
   if (loading) return <Loading />;
@@ -77,25 +80,35 @@ const App = (props) => {
 
   console.log("read laters", childrenReadLater);
 
-
+  // Theme toggle
+  const toggleTheme = () => {
+    if(theme === 'light'){
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }
   
   return (
     <Router>
-      <LightModeBg>
-        <LightModeContentWrapper>
-          <LightModeHeaderWrapper>
-            <HeaderCont>
-              <HeadingLinkStyle to="/">
-                <Header><HeaderTodayText>Today's </HeaderTodayText>Tech News</Header>
-              </HeadingLinkStyle>
-              <BorderLine />
-              <NavMenu />
-              <RightAlingedBox>
-                <ModeToggle isOn={value} handleToggle={() => setValue(!value)} onColor="#4100FA" />
-              </RightAlingedBox>
-            </HeaderCont>
-          </LightModeHeaderWrapper>
-          <MainWrapper>
+      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+        <GlobalStyles />
+        <LightModeBg>
+          <LightModeContentWrapper>
+            <LightModeHeaderWrapper>
+              <HeaderCont>
+                <HeadingLinkStyle to="/">
+                  <Header><HeaderTodayText>Today's </HeaderTodayText>Tech News</Header>
+                </HeadingLinkStyle>
+                <BorderLine />
+                <NavMenu />
+                <RightAlingedBox>
+                  <ModeToggle isOn={theme} handleToggle={toggleTheme} onColor="#4100FA" />
+                
+                </RightAlingedBox>
+              </HeaderCont>
+            </LightModeHeaderWrapper>
+            <MainWrapper>
             <Switch>
               <Route exact path="/">
                 <FrontHeadliner />
@@ -145,12 +158,12 @@ const App = (props) => {
                     <ReadLater key={item.id} readLaterId={item.id} readLaterUrl={item.url} readLaterTitle={item.title} readLaterTimeISO={formatDate(item.timeISO)} />
                   )}
                 </HeadlinerColBox>
-                <ReadLater />
               </Route>
             </Switch>
           </MainWrapper>
-        </LightModeContentWrapper>
-      </LightModeBg>
+          </LightModeContentWrapper>
+        </LightModeBg>
+      </ThemeProvider>
     </Router>
   );
 }

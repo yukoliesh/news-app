@@ -5,7 +5,7 @@ import NewsItem from './NewsItem';
 import Loading from '../Loading';
 import ErrorPage from '../ErrorPage';
 
-import { Box }  from '../stylesheet/stylesheet';
+import { Box }  from '../styles/light_style';
 
 const PopularNews = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);

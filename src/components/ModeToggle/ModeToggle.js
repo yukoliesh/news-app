@@ -1,6 +1,6 @@
 import React from 'react';
 import './ModeToggle.css';
-import { LightModeSwitchLabel }  from '../../stylesheet/stylesheet';
+import { LightModeSwitchLabel }  from '../../styles/light_style';
 
 const ModeToggle = ({isOn, handleToggle, onColor}) => {
   return (
