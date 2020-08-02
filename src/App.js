@@ -14,14 +14,18 @@ import YourFavorite from './components/YourFavorite';
 import ReadLater from './components/ReadLater';
 import ModeToggle from "./components/ModeToggle/ModeToggle";
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { GlobalStyles, LightModeContentWrapper, LightModeHeaderWrapper, Header, BorderLine, HeadingLinkStyle, LightModeBg, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper, PopularHeader, LatestHeader, HeadlinerColBox, FavoriteHeader }  from './styles/light_style';
+import { useDarkMode } from './hooks/useDarkMode';
+import { ContentWrapper, HeaderWrapper, Header, BorderLine, HeadingLinkStyle, Background, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper, PopularHeader, LatestHeader, HeadlinerColBox, FavoriteHeader, LightModeSwitchLabel }  from './styles/style';
+import { GlobalStyles } from './styles/global';
 
 const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
   // const [value, setValue] = React.useState(false);
   const [favorites, setFavorites] = useLocalStorage('favorites', []);
   const [readlaters, setReadLaters] = useLocalStorage('readlaters', []);
-  const [theme, setTheme] = React.useState('light');
+  // const [theme, setTheme] = React.useState('light');
+  const [theme, toggleTheme, componentMounted] = useDarkMode();
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
   console.log( { loading, error, data });
   if (loading) return <Loading />;
@@ -78,24 +82,19 @@ const App = (props) => {
   const cleanReadLaterPopSt = removeUndefined(readLaterObjsFromPopStories);
   const childrenReadLater = cleanReadLaterNewSt.concat(cleanReadLaterPopSt);
 
-  console.log("read laters", childrenReadLater);
+  if (!componentMounted) {
+    return <div />
+  };
 
-  // Theme toggle
-  const toggleTheme = () => {
-    if(theme === 'light'){
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-  }
+
   
   return (
     <Router>
-      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <ThemeProvider theme={themeMode}>
         <GlobalStyles />
-        <LightModeBg>
-          <LightModeContentWrapper>
-            <LightModeHeaderWrapper>
+        <Background>
+          <ContentWrapper>
+            <HeaderWrapper>
               <HeaderCont>
                 <HeadingLinkStyle to="/">
                   <Header><HeaderTodayText>Today's </HeaderTodayText>Tech News</Header>
@@ -103,11 +102,13 @@ const App = (props) => {
                 <BorderLine />
                 <NavMenu />
                 <RightAlingedBox>
-                  <ModeToggle isOn={theme} handleToggle={toggleTheme} onColor="#4100FA" />
-                
+                  <LightModeSwitchLabel>
+                    {theme === 'light' ? 'Light Mode' : 'Dark Mode'}
+                  </LightModeSwitchLabel>
+                  <ModeToggle isOn={theme} handleToggle={() => toggleTheme()} onColor="#4100FA" />
                 </RightAlingedBox>
               </HeaderCont>
-            </LightModeHeaderWrapper>
+            </HeaderWrapper>
             <MainWrapper>
             <Switch>
               <Route exact path="/">
@@ -161,8 +162,8 @@ const App = (props) => {
               </Route>
             </Switch>
           </MainWrapper>
-          </LightModeContentWrapper>
-        </LightModeBg>
+          </ContentWrapper>
+        </Background>
       </ThemeProvider>
     </Router>
   );

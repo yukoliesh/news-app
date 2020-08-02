@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavCont, NavItem, LinkStyle }  from '../styles/light_style';
+import { NavCont, NavItem, LinkStyle }  from '../styles/style';
 
 
 const NavMenu = (props) => {

@@ -1,46 +1,29 @@
-import styled, { css, createGlobalStyle } from '@xstyled/styled-components';
+import styled, { css } from '@xstyled/styled-components';
 import { system } from '@xstyled/system'
 import { Link } from 'react-router-dom';
 import { pageHeaderFontStyle, fontFamily } from "./font-style"
-import { lm_bg_lightblue, lm_purple, lm_latestBlue, lm_popularGreen, lm_white, lm_favorite, grey, lightTheme } from "./color"
+import {  lm_purple, lm_white, lm_favorite, grey } from "./color"
 import {bg, displayflex} from "./layout";
 
-
-export const GlobalStyles = createGlobalStyle`
-  *,
-  *::after,
-  *::before {
-    box-sizing: border-box;
-  }
-
-  body {
-    background: ${({ theme }) => theme.body};
-    color: ${({ theme }) => theme.text};
-    padding: 0;
-    margin: 0;
-    transition: all 0.25s linear;
-  }
-`;
-
 // App component
-export const LightModeBg = styled.div`
+export const Background = styled.div`
   ${displayflex}
   ${bg}
-  background-color: ${lm_bg_lightblue};
 `;
 
-export const LightModeContentWrapper = styled.div`
+export const ContentWrapper = styled.div`
   ${fontFamily}
-  background-color: ${lm_white};
+  background-color: ${({ theme }) => theme.wrapperBg};
   border-radius: 1.5em 1.5em 0 0;
   width: 70vw;
   min-height: 40vh;
   padding-bottom: 3em;
 `;
 
-export const LightModeHeaderWrapper = styled.div`
+export const HeaderWrapper = styled.div`
   ${displayflex}
-  ${lightTheme}
+  background: ${({ theme }) => theme.headerBg};
+  background: ${({ theme }) => theme.headerGradient};
   border-radius: 1.5em 1.5em 0 0;
   padding: 4em 5em;
   height: 350px;
@@ -106,10 +89,8 @@ export const HeadlinerColBox = styled(Box)`
 `;
 
 export const HeadlinerColCont = styled(Box)`
-  background-color:  ${lm_white};
-  -webkit-box-shadow: 0px 30px 30px 0px rgba(125,125,125,1);
-  -moz-box-shadow: 0px 30px 30px 0px rgba(125,125,125,1);
-  box-shadow: 0px 30px 30px 0px rgba(125,125,125,1);
+  background-color:  ${({ theme }) => theme.headlinerBg};
+  box-shadow:  ${({ theme }) => theme.boxShadow};
   padding: 1em 2em 2em;
   border-radius: 1.5em;
   width: 40%;
@@ -140,12 +121,12 @@ export const LightModeSwitchLabel = styled.span`
 // Front HeadLiner
 export const LatestHeader = styled.h2`
   ${pageHeaderFontStyle}
-  color: ${lm_latestBlue};
+  color: ${({ theme }) => theme.latestColor};
 `;
 
 export const PopularHeader = styled.h2`
   ${pageHeaderFontStyle}
-  color: ${lm_popularGreen};
+  color: ${({ theme }) => theme.popularColor};
 `;
 
 const MoreButtonStyle = css`
@@ -159,23 +140,23 @@ const MoreButtonStyle = css`
 
 export const MoreLatestButton = styled(Link)`
   ${MoreButtonStyle}
-  background-color: ${lm_latestBlue};
+  background-color: ${({ theme }) => theme.latestColor};
   color: ${lm_white};
 `;
 export const MorePopularButton = styled(Link)`
   ${MoreButtonStyle}
-  background-color: ${lm_popularGreen};
+  background-color: ${({ theme }) => theme.popularColor};
   color: ${lm_white};
 `;
 
 
 // Link Style
 export const HyperLinkStyle = styled.a`
-  color: ${lm_purple};
+  color: ${({ theme }) => theme.titleLink};
   font-weight: 600;
   text-decoration: none; 
   &:hover{
-    color: ${grey}
+    color: ${({ theme }) => theme.titleLinkHover};
   }
 `;
 
@@ -194,17 +175,7 @@ export const HeartIcon = styled.button`
   background: none;
   cursor: pointer;
   outline: none;
- .ripple{
-    background-position: center;
-    transition: background 0.8s;
-    &:hover{
-      background: #ff0000 radial-gradient(circle, transparent 1%, #ff0000 1%) center/15000%;
-    }
-    &:hover{
-      background-color: #6eb9f7;
-      background-size: 100%;
-      transition: background 0s;
-    }
+  color: ${({ theme }) => theme.heartIcon};
  }
 `;
 // Read Later icon
@@ -213,9 +184,7 @@ export const ReadLaterIcon = styled.button`
   background: none;
   cursor: pointer;
   outline: none;
-  &:active{
-    color: #ff0000;
-  }
+  color: ${({ theme }) => theme.bookmarkIcon};
 `;
 
 // Your Favorite page

@@ -1,4 +1,3 @@
-import { css } from '@xstyled/styled-components';
 
 // Common Colors
 export const lm_bg_lightblue = "#C0E7FE";
@@ -11,14 +10,3 @@ export const dk_bg_lightpurple = "#D7C0FE";
 
 // grey
 export const grey = "#333";
-
-export const lightTheme = css`
-  background: rgb(65,0,250);
-  background: linear-gradient(144deg, rgba(65,0,250,1) 0%, rgba(124,240,248,1) 100%);
-`;
-
-export const darkTheme = css`
-  background: rgb(20,13,242);
-  background: linear-gradient(155deg, rgba(20,13,242,1) 0%, rgba(160,16,228,1) 67%); 
-`;
-

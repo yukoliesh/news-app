@@ -1,11 +1,9 @@
 import React from 'react';
 import './ModeToggle.css';
-import { LightModeSwitchLabel }  from '../../styles/light_style';
 
 const ModeToggle = ({isOn, handleToggle, onColor}) => {
   return (
     <React.Fragment>
-      <LightModeSwitchLabel>Dark Mode</LightModeSwitchLabel>
       <input
         checked={isOn}
         onChange={handleToggle}
