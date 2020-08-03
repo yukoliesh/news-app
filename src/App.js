@@ -58,7 +58,7 @@ const App = (props) => {
     setReadLaters([...readlaters, postId])
   }
 
-  // Create a new set of Favorite List
+  // Create a new set of Favorite List without duplicated postId
   const removeDuplicates = (arr) => {
     return Array.from(new Set(arr));
   }
@@ -72,6 +72,7 @@ const App = (props) => {
   const favObjsFromPopStories = uniqueFavorite.map(id => popularStories.find(obj => obj.id === id));
   const cleanFavsNewSt = removeUndefined(favObjsFromNewStories);
   const cleanFavsPopSt = removeUndefined(favObjsFromPopStories);
+  // Concatenate two arrays from newStories and popularStories for Your Favorite page
   const childrenFavs = cleanFavsNewSt.concat(cleanFavsPopSt);
 
   // For Read Later Page
@@ -80,8 +81,10 @@ const App = (props) => {
   const readLaterObjsFromPopStories = uniqueReadLaters.map(id => popularStories.find(obj => obj.id === id));
   const cleanReadLaterNewSt = removeUndefined(readLaterObjsFromNewStories);
   const cleanReadLaterPopSt = removeUndefined(readLaterObjsFromPopStories);
+    // Concatenate two arrays from newStories and popularStories for Read Later page
   const childrenReadLater = cleanReadLaterNewSt.concat(cleanReadLaterPopSt);
 
+  // This is for DarkMode - to check if darkmode component has mounted or not.
   if (!componentMounted) {
     return <div />
   };
