@@ -88,12 +88,11 @@ export const HeadlinerColBox = styled(Box)`
 
 `;
 
-export const HeadlinerColCont = styled(Box)`
+export const HeadlinerColCont = styled.div`
   background-color:  ${({ theme }) => theme.headlinerBg};
   box-shadow:  ${({ theme }) => theme.boxShadow};
   padding: 1em 2em 2em;
   border-radius: 1.5em;
-  width: 40%;
 `;
 
 export const NewsTitleEllipsisBox = styled(Box)`

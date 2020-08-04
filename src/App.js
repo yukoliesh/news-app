@@ -88,8 +88,6 @@ const App = (props) => {
   if (!componentMounted) {
     return <div />
   };
-
-
   
   return (
     <Router>
