@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { NEWS_QUERY } from '../apollo/query';
 import NewsItem from './NewsItem';
+import { formatDate } from '../utils';
 import { HeadlinerColBox, LatestHeader, PopularHeader, HeadlinerColCont, MoreLatestButton, CenterBox, MorePopularButton, Box }  from '../styles/style';
 
 const FrontHeadliner = (props) => {
@@ -12,16 +13,6 @@ const FrontHeadliner = (props) => {
 
   const limitTopStories = topStories.slice(0, 5);
   const limitNewStories = newStories.slice(0, 5);
-
-
-   // Format Date and time
-   const formatDate = (timeISO) => {
-    const date = timeISO.split("T")[0];
-    const timeSplit = timeISO.split("."[0]);
-    const time = timeSplit[0].split("T")[1];
-    // return `${timeISO.split("T")[0]} ${timeISO.split(".")[0]}` 
-    return date + " " + time;
-  }
   
   return (
       <HeadlinerColBox row m={3}>

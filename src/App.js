@@ -17,6 +17,7 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 import { useDarkMode } from './hooks/useDarkMode';
 import { ContentWrapper, HeaderWrapper, Header, BorderLine, HeadingLinkStyle, Background, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper, PopularHeader, LatestHeader, HeadlinerColBox, FavoriteHeader, LightModeSwitchLabel }  from './styles/style';
 import { GlobalStyles } from './styles/global';
+import { formatDate } from './utils';
 
 const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
@@ -39,15 +40,6 @@ const App = (props) => {
   const popularStories = data.hn.topStories;
   const newStories = data.hn.newStories;
 
-  // Format Date and time
-  const formatDate = (timeISO) => {
-    const date = timeISO.split("T")[0];
-    const timeSplit = timeISO.split("."[0]);
-    const time = timeSplit[0].split("T")[1];
-    // return `${timeISO.split("T")[0]} ${timeISO.split(".")[0]}` 
-    return date + " " + time;
-  }
-
   // Adding postId to localStorage
   const addFavorite = (postId) => {
     console.log("add fav", favorites);
@@ -57,6 +49,8 @@ const App = (props) => {
     console.log("add readlaters", readlaters);
     setReadLaters([...readlaters, postId])
   }
+
+
 
   // Create a new set of Favorite List without duplicated postId
   const removeDuplicates = (arr) => {
@@ -68,8 +62,15 @@ const App = (props) => {
   }
   // For Your Favorite Page
   const uniqueFavorite = removeDuplicates(favorites);
+  // Get the objects with the id that matches with the id from the array of Your Favorite
   const favObjsFromNewStories = uniqueFavorite.map(id => newStories.find(obj => obj.id === id));
+  console.log("what", favObjsFromNewStories);
   const favObjsFromPopStories = uniqueFavorite.map(id => popularStories.find(obj => obj.id === id));
+  if(!undefined){
+    console.log("hey", favObjsFromNewStories);
+    return favObjsFromNewStories
+  }
+
   const cleanFavsNewSt = removeUndefined(favObjsFromNewStories);
   const cleanFavsPopSt = removeUndefined(favObjsFromPopStories);
   // Concatenate two arrays from newStories and popularStories for Your Favorite page
