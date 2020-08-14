@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, HyperLinkStyle, NewsTitleEllipsisBox, HeartIcon, ReadLaterIcon }  from '../styles/style';
-
 
 const NewsItem = (props) => {
   return (
@@ -26,6 +26,13 @@ const NewsItem = (props) => {
     </Box>
 
   );
+};
+
+NewsItem.propTypes = {
+  id: PropTypes.string,
+  url: PropTypes.string,
+  title: PropTypes.string,
+  timeISO: PropTypes.string
 };
 
 export default NewsItem;

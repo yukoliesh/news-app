@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/react-hooks';
 import { NEWS_QUERY } from '../apollo/query';
 import NewsItem from './NewsItem';
@@ -30,4 +31,12 @@ const LatestNews = (props) => {
   );
 }
 
+LatestNews.propTypes = {
+  latestNewsId: PropTypes.string,
+  latestUrl: PropTypes.string,
+  latestNewsTitle: PropTypes.string,
+  latestTime: PropTypes.string,
+  onFavoriteClick: PropTypes.func,
+  onBookmarkClick: PropTypes.func
+};
 export default LatestNews;

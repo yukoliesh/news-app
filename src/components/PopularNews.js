@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/react-hooks';
 import { NEWS_QUERY } from '../apollo/query';
 import NewsItem from './NewsItem';
@@ -31,5 +32,14 @@ const PopularNews = (props) => {
     </Box>
   );
 }
+
+PopularNews.propTypes = {
+  popularId: PropTypes.string,
+  popularUrl: PropTypes.string,
+  popularNewsTitle: PropTypes.string,
+  popularTime: PropTypes.string,
+  onFavoriteClick: PropTypes.func,
+  onBookmarkClick: PropTypes.func
+};
 
 export default PopularNews;

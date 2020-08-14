@@ -10,8 +10,8 @@ import ErrorPage from "./ErrorPage";
 import FrontHeadliner from "./components/FrontHeadliner";
 import LatestNews from './components/LatestNews';
 import PopularNews from './components/PopularNews';
-import YourFavorite from './components/YourFavorite';
-import ReadLater from './components/ReadLater';
+// import YourFavorite from './components/YourFavorite';
+// import ReadLater from './components/ReadLater';
 import ModeToggle from "./components/ModeToggle/ModeToggle";
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { useDarkMode } from './hooks/useDarkMode';
@@ -22,8 +22,8 @@ import { formatDate } from './utils';
 const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
   // const [value, setValue] = React.useState(false);
-  const [favorites, setFavorites] = useLocalStorage('favorites', []);
-  const [readlaters, setReadLaters] = useLocalStorage('readlaters', []);
+  const [favorites, setFavorites] = useLocalStorage('favorites', new Set());
+  const [readlaters, setReadLaters] = useLocalStorage('readlaters', new Set());
   // const [theme, setTheme] = React.useState('light');
   const [theme, toggleTheme, componentMounted] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
@@ -42,48 +42,52 @@ const App = (props) => {
 
   // Adding postId to localStorage
   const addFavorite = (postId) => {
-    console.log("add fav", favorites);
-    setFavorites([...favorites, postId]);
+    // // Array.from(new Set(favorites)); 
+    // // setFavorites([...favorites, postId]);
+   
+    // let newFav = new Set(favorite);
+    // newFav.add(postId);
+    // console.log("fav02", newFav.add(postId));
+    // // check there is no duplicates before you add
+    // setFavorites(newFav);
+    // console.log("fav", favorites);
+
+   let favoriteList = [];
+   let favoriteSet = new Set(favoriteList);
+   favoriteSet.add(postId);
+   setFavorites([...favoriteSet]);
   }
   const addReadLaters = (postId) => {
     console.log("add readlaters", readlaters);
-    setReadLaters([...readlaters, postId])
+    const newReadLaters = new Set(readlaters)
+    newReadLaters.add(postId);
+    setReadLaters(newReadLaters);
   }
 
-
+  console.log("add fav", favorites);
+  // console.log("add laters", {readlaters});
 
   // Create a new set of Favorite List without duplicated postId
-  const removeDuplicates = (arr) => {
-    return Array.from(new Set(arr));
-  }
-  // Remove undefined if there is any
-  const removeUndefined = (item) => {
-    return item.filter(x => x !== undefined)
-  }
-  // For Your Favorite Page
-  const uniqueFavorite = removeDuplicates(favorites);
-  // Get the objects with the id that matches with the id from the array of Your Favorite
-  const favObjsFromNewStories = uniqueFavorite.map(id => newStories.find(obj => obj.id === id));
-  console.log("what", favObjsFromNewStories);
-  const favObjsFromPopStories = uniqueFavorite.map(id => popularStories.find(obj => obj.id === id));
-  if(!undefined){
-    console.log("hey", favObjsFromNewStories);
-    return favObjsFromNewStories
-  }
+  // const removeDuplicates = (arr) => {
+  //   return Array.from(new Set(arr));
+  // }
+  // // Remove undefined if there is any
+  // const removeUndefined = (item) => {
+  //   return item.filter(x => x !== undefined)
+  // }
 
-  const cleanFavsNewSt = removeUndefined(favObjsFromNewStories);
-  const cleanFavsPopSt = removeUndefined(favObjsFromPopStories);
+  // Get the objects with the id that matches with the id from the array of Your Favorite
+//   const favObjsFromNewStories = favorites.map(id => newStories.find(obj => obj.id === id));
+//   const favObjsFromPopStories = favorites.map(id => popularStories.find(obj => obj.id === id));
+//  console.log({favObjsFromNewStories});
   // Concatenate two arrays from newStories and popularStories for Your Favorite page
-  const childrenFavs = cleanFavsNewSt.concat(cleanFavsPopSt);
+  // const childrenFavs = favObjsFromNewStories.concat(favObjsFromPopStories);
 
   // For Read Later Page
-  const uniqueReadLaters = removeDuplicates(readlaters);
-  const readLaterObjsFromNewStories = uniqueReadLaters.map(id => newStories.find(obj => obj.id === id));
-  const readLaterObjsFromPopStories = uniqueReadLaters.map(id => popularStories.find(obj => obj.id === id));
-  const cleanReadLaterNewSt = removeUndefined(readLaterObjsFromNewStories);
-  const cleanReadLaterPopSt = removeUndefined(readLaterObjsFromPopStories);
+  // const readLaterObjsFromNewStories = readlaters.map(id => newStories.find(obj => obj.id === id));
+  // const readLaterObjsFromPopStories = readlaters.map(id => popularStories.find(obj => obj.id === id));
     // Concatenate two arrays from newStories and popularStories for Read Later page
-  const childrenReadLater = cleanReadLaterNewSt.concat(cleanReadLaterPopSt);
+  // const childrenReadLater = readLaterObjsFromNewStories.concat(readLaterObjsFromPopStories);
 
   // This is for DarkMode - to check if darkmode component has mounted or not.
   if (!componentMounted) {
@@ -149,17 +153,13 @@ const App = (props) => {
               <Route path="/YourFavorite">
                 <HeadlinerColBox>
                   <FavoriteHeader>Your Favorite</FavoriteHeader>
-                  {childrenFavs && childrenFavs.map(item => 
-                    <YourFavorite key={item.id} favoriteId={item.id} favoriteUrl={item.url} favoriteTitle={item.title} favoriteTimeISO={formatDate(item.timeISO)} />
-                  )}
+                  
                 </HeadlinerColBox>
               </Route>
               <Route path="/ReadLater">
                 <HeadlinerColBox>
                   <FavoriteHeader>Read Later</FavoriteHeader>
-                  {childrenReadLater && childrenReadLater.map(item =>
-                    <ReadLater key={item.id} readLaterId={item.id} readLaterUrl={item.url} readLaterTitle={item.title} readLaterTimeISO={formatDate(item.timeISO)} />
-                  )}
+                 
                 </HeadlinerColBox>
               </Route>
             </Switch>

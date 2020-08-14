@@ -175,7 +175,6 @@ export const HeartIcon = styled.button`
   cursor: pointer;
   outline: none;
   color: ${({ theme }) => theme.heartIcon};
- }
 `;
 // Read Later icon
 export const ReadLaterIcon = styled.button`

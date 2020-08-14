@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/react-hooks';
 import { NEWS_QUERY } from '../apollo/query';
 import NewsItem from './NewsItem';
@@ -46,5 +47,12 @@ const FrontHeadliner = (props) => {
     
   );
 }
+
+FrontHeadliner.propTypes = {
+  id: PropTypes.string,
+  url: PropTypes.string,
+  title: PropTypes.string,
+  timeISO: PropTypes.string
+};
 
 export default FrontHeadliner;
