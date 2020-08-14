@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from '@xstyled/styled-components';
 import { lightTheme, darkTheme } from './styles/global';
-import { useQuery } from '@apollo/react-hooks';
-import { NEWS_QUERY } from './apollo/query';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { NEWS_QUERY, SAVE_QUERY } from './apollo/query';
 import NavMenu from "./components/NavMenu";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
@@ -21,9 +21,10 @@ import { formatDate } from './utils';
 
 const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
+  const { data } = useMutation(SAVE_QUERY);
   // const [value, setValue] = React.useState(false);
-  const [favorites, setFavorites] = useLocalStorage('favorites', new Set());
-  const [readlaters, setReadLaters] = useLocalStorage('readlaters', new Set());
+  const [favorites, setFavorites] = useLocalStorage('favorites', []);
+  const [readlaters, setReadLaters] = useLocalStorage('readlaters', []);
   // const [theme, setTheme] = React.useState('light');
   const [theme, toggleTheme, componentMounted] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
@@ -41,26 +42,17 @@ const App = (props) => {
   const newStories = data.hn.newStories;
 
   // Adding postId to localStorage
+  let favoriteSet = new Set(favorites);
   const addFavorite = (postId) => {
-    // // Array.from(new Set(favorites)); 
-    // // setFavorites([...favorites, postId]);
-   
-    // let newFav = new Set(favorite);
-    // newFav.add(postId);
-    // console.log("fav02", newFav.add(postId));
-    // // check there is no duplicates before you add
-    // setFavorites(newFav);
-    // console.log("fav", favorites);
-
-   let favoriteList = [];
-   let favoriteSet = new Set(favoriteList);
-   favoriteSet.add(postId);
-   setFavorites([...favoriteSet]);
+    favoriteSet.add(postId);
+    const newFav = [...favoriteSet]
+    setFavorites(newFav);
   }
+
+  let readLatersSet = new Set(readlaters);
   const addReadLaters = (postId) => {
-    console.log("add readlaters", readlaters);
-    const newReadLaters = new Set(readlaters)
-    newReadLaters.add(postId);
+    readLatersSet.add(postId);
+    const newReadLaters = [...readLatersSet]
     setReadLaters(newReadLaters);
   }
 
