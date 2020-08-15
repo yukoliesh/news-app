@@ -2,16 +2,16 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from '@xstyled/styled-components';
 import { lightTheme, darkTheme } from './styles/global';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import { NEWS_QUERY, SAVE_QUERY } from './apollo/query';
+import { useQuery } from '@apollo/react-hooks';
+import { NEWS_QUERY } from './apollo/query';
 import NavMenu from "./components/NavMenu";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
 import FrontHeadliner from "./components/FrontHeadliner";
 import LatestNews from './components/LatestNews';
 import PopularNews from './components/PopularNews';
-// import YourFavorite from './components/YourFavorite';
-// import ReadLater from './components/ReadLater';
+import YourFavorite from './components/YourFavorite';
+import ReadLater from './components/ReadLater';
 import ModeToggle from "./components/ModeToggle/ModeToggle";
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { useDarkMode } from './hooks/useDarkMode';
@@ -21,11 +21,10 @@ import { formatDate } from './utils';
 
 const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
-  const { data } = useMutation(SAVE_QUERY);
   // const [value, setValue] = React.useState(false);
   const [favorites, setFavorites] = useLocalStorage('favorites', []);
   const [readlaters, setReadLaters] = useLocalStorage('readlaters', []);
-  // const [theme, setTheme] = React.useState('light');
+
   const [theme, toggleTheme, componentMounted] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
@@ -42,44 +41,32 @@ const App = (props) => {
   const newStories = data.hn.newStories;
 
   // Adding postId to localStorage
-  let favoriteSet = new Set(favorites);
-  const addFavorite = (postId) => {
-    favoriteSet.add(postId);
-    const newFav = [...favoriteSet]
-    setFavorites(newFav);
+
+  /**
+   * Adds a new post to state
+   * @param {{ id: string, url: string}} post 
+   */
+  const addFavorite = (post) => {
+    // for checking undefined or any falsy value
+    if (!post) {
+      return;
+    }
+    const isPost = favorites.some(fav => fav.id === post.id)
+    if (!isPost) {
+      setFavorites([...favorites, post])
+    }
   }
 
-  let readLatersSet = new Set(readlaters);
-  const addReadLaters = (postId) => {
-    readLatersSet.add(postId);
-    const newReadLaters = [...readLatersSet]
-    setReadLaters(newReadLaters);
+  const addReadLaters = (post) => {
+    // for checking undefined or any falsy value
+    if (!post) {
+      return;
+    }
+    const isPost = readlaters.some(laters => laters.id === post.id)
+    if (!isPost) {
+      setReadLaters([...readlaters, post])
+    }
   }
-
-  console.log("add fav", favorites);
-  // console.log("add laters", {readlaters});
-
-  // Create a new set of Favorite List without duplicated postId
-  // const removeDuplicates = (arr) => {
-  //   return Array.from(new Set(arr));
-  // }
-  // // Remove undefined if there is any
-  // const removeUndefined = (item) => {
-  //   return item.filter(x => x !== undefined)
-  // }
-
-  // Get the objects with the id that matches with the id from the array of Your Favorite
-//   const favObjsFromNewStories = favorites.map(id => newStories.find(obj => obj.id === id));
-//   const favObjsFromPopStories = favorites.map(id => popularStories.find(obj => obj.id === id));
-//  console.log({favObjsFromNewStories});
-  // Concatenate two arrays from newStories and popularStories for Your Favorite page
-  // const childrenFavs = favObjsFromNewStories.concat(favObjsFromPopStories);
-
-  // For Read Later Page
-  // const readLaterObjsFromNewStories = readlaters.map(id => newStories.find(obj => obj.id === id));
-  // const readLaterObjsFromPopStories = readlaters.map(id => popularStories.find(obj => obj.id === id));
-    // Concatenate two arrays from newStories and popularStories for Read Later page
-  // const childrenReadLater = readLaterObjsFromNewStories.concat(readLaterObjsFromPopStories);
 
   // This is for DarkMode - to check if darkmode component has mounted or not.
   if (!componentMounted) {
@@ -122,8 +109,8 @@ const App = (props) => {
                       latestTime={formatDate(item.timeISO)}
                       latestUrl={item.url}
                       key={item.id} 
-                      onFavoriteClick={() => addFavorite(item.id)} 
-                      onBookmarkClick={() => addReadLaters(item.id)}  /> 
+                      onFavoriteClick={() => addFavorite(item)} 
+                      onBookmarkClick={() => addReadLaters(item)}  /> 
                     )}
                 </HeadlinerColBox>
               </Route>
@@ -137,21 +124,25 @@ const App = (props) => {
                       popularTime={formatDate(item.timeISO)}
                       popularUrl={item.url} 
                       key={item.id} 
-                      onFavoriteClick={() => addFavorite(item.id)} 
-                      onBookmarkClick={() => addReadLaters(item.id)}  />
+                      onFavoriteClick={() => addFavorite(item)} 
+                      onBookmarkClick={() => addReadLaters(item)}  />
                   )}
                 </HeadlinerColBox>
               </Route> 
               <Route path="/YourFavorite">
                 <HeadlinerColBox>
                   <FavoriteHeader>Your Favorite</FavoriteHeader>
-                  
+                  {favorites && favorites.map(item => 
+                    <YourFavorite id={item.id} url={item.url} title={item.title} timeISO={item.timeISO} />
+                  )}
                 </HeadlinerColBox>
               </Route>
               <Route path="/ReadLater">
                 <HeadlinerColBox>
                   <FavoriteHeader>Read Later</FavoriteHeader>
-                 
+                  {readlaters && readlaters.map(item => 
+                    <ReadLater id={item.id} url={item.url} title={item.title} timeISO={item.timeISO} />
+                  )}
                 </HeadlinerColBox>
               </Route>
             </Switch>
