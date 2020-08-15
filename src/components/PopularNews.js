@@ -5,10 +5,12 @@ import { NEWS_QUERY } from '../apollo/query';
 import NewsItem from './NewsItem';
 import Loading from '../Loading';
 import ErrorPage from '../ErrorPage';
+
 import { Box }  from '../styles/style';
 
-const LatestNews = (props) => {
+const PopularNews = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
+
   // Loading
   if (loading) return <Loading />;
   if (error) {
@@ -20,23 +22,24 @@ const LatestNews = (props) => {
   return (
     <Box>
       <NewsItem 
-        id={props.latestNewsId}
-        title={props.latestNewsTitle} 
-        timeISO={props.latestTime} 
-        url={props.latestUrl} 
-        key={props.latestKey} 
+        id={props.popularId}
+        title={props.popularNewsTitle} 
+        timeISO={props.popularTime} 
+        url={props.popularUrl} 
+        key={props.popularKey} 
         onFavoriteClick={props.onFavoriteClick} 
         onBookmarkClick={props.onBookmarkClick} />
     </Box>
   );
 }
 
-LatestNews.propTypes = {
-  latestNewsId: PropTypes.string,
-  latestUrl: PropTypes.string,
-  latestNewsTitle: PropTypes.string,
-  latestTime: PropTypes.string,
+PopularNews.propTypes = {
+  popularId: PropTypes.string,
+  popularUrl: PropTypes.string,
+  popularNewsTitle: PropTypes.string,
+  popularTime: PropTypes.string,
   onFavoriteClick: PropTypes.func,
   onBookmarkClick: PropTypes.func
 };
-export default LatestNews;
+
+export default PopularNews;
