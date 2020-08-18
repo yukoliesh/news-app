@@ -1,6 +1,4 @@
 import React from 'react';
-import Loading from '../Loading';
-import ErrorPage from '../ErrorPage';
 import { Box, HyperLinkStyle, SavedItem, SavedItems }  from '../styles/style';
 
 const ReadLater = (props) => {

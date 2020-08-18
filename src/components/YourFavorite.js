@@ -1,8 +1,4 @@
 import React from 'react';
-import { useMutation } from '@apollo/react-hooks';
-// import { SAVE_QUERY } from '../apollo/query';
-import Loading from '../Loading';
-import ErrorPage from '../ErrorPage';
 import { Box, HyperLinkStyle, SavedItems, SavedItem }  from '../styles/style';
 
 
