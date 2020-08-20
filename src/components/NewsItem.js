@@ -4,7 +4,7 @@ import { Box, HyperLinkStyle, NewsTitleEllipsisBox, HeartIcon, ReadLaterIcon }  
 
 // get our fontawesome imports
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { far } from "@fortawesome/free-regular-svg-icons";
+// import { far } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NewsItem = (props) => {
@@ -19,7 +19,6 @@ const NewsItem = (props) => {
         <Box>{props.timeISO}</Box>
       </Box>
       <Box col>
-        <FontAwesomeIcon icon={[far, faHeart]} />
         <FontAwesomeIcon icon={faHeart} />
         <HeartIcon onClick={props.onFavoriteClick}>
           <i id={props.id} className="fa fa-heart-o fa-lg"></i>

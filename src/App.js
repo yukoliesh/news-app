@@ -18,13 +18,12 @@ import { useDarkMode } from './hooks/useDarkMode';
 import { ContentWrapper, HeaderWrapper, Header, BorderLine, HeadingLinkStyle, Background, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper, PopularHeader, LatestHeader, HeadlinerColBox, FavoriteHeader, LightModeSwitchLabel }  from './styles/style';
 import { GlobalStyles } from './styles/global';
 import { formatDate } from './utils';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { far } from "@fortawesome/free-regular-svg-icons";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+// import { library } from '@fortawesome/fontawesome-svg-core'
+// import { far } from "@fortawesome/free-regular-svg-icons";
+// import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
-  // const [value, setValue] = React.useState(false);
   const [favorites, setFavorites] = useLocalStorage('favorites', []);
   const [readlaters, setReadLaters] = useLocalStorage('readlaters', []);
 
@@ -42,6 +41,8 @@ const App = (props) => {
   // Getting the stories
   const popularStories = data.hn.topStories;
   const newStories = data.hn.newStories;
+
+  console.log(newStories);
 
   // Adding postId to localStorage
 
@@ -85,7 +86,7 @@ const App = (props) => {
             <HeaderWrapper>
               <HeaderCont>
                 <HeadingLinkStyle to="/">
-                  <Header><HeaderTodayText>Today's </HeaderTodayText>Tech News</Header>
+                  <Header data-testid="today-news-title"><HeaderTodayText>Today's </HeaderTodayText>Tech News</Header>
                 </HeadingLinkStyle>
                 <BorderLine />
                 <NavMenu />
@@ -107,10 +108,10 @@ const App = (props) => {
                   <LatestHeader>Latest News</LatestHeader>
                   {newStories && newStories.map(item => 
                     <LatestNews 
-                      latestNewsId={item.id}
-                      latestNewsTitle={item.title}
-                      latestTime={formatDate(item.timeISO)}
-                      latestUrl={item.url}
+                      id={item.id}
+                      title={item.title}
+                      timeISO={formatDate(item.timeISO)}
+                      url={item.url}
                       key={item.id} 
                       onFavoriteClick={() => addFavorite(item)} 
                       onBookmarkClick={() => addReadLaters(item)}  /> 
@@ -122,10 +123,10 @@ const App = (props) => {
                   <PopularHeader>Popular News</PopularHeader>
                   {popularStories && popularStories.map(item => 
                     <PopularNews 
-                      popularId={item.id}
-                      popularNewsTitle={item.title}
-                      popularTime={formatDate(item.timeISO)}
-                      popularUrl={item.url} 
+                      id={item.id}
+                      title={item.title}
+                      timeISO={formatDate(item.timeISO)}
+                      url={item.url} 
                       key={item.id} 
                       onFavoriteClick={() => addFavorite(item)} 
                       onBookmarkClick={() => addReadLaters(item)}  />
