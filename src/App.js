@@ -18,9 +18,6 @@ import { useDarkMode } from './hooks/useDarkMode';
 import { ContentWrapper, HeaderWrapper, Header, BorderLine, HeadingLinkStyle, Background, HeaderTodayText, RightAlingedBox, HeaderCont, MainWrapper, PopularHeader, LatestHeader, HeadlinerColBox, FavoriteHeader, LightModeSwitchLabel }  from './styles/style';
 import { GlobalStyles } from './styles/global';
 import { formatDate } from './utils';
-// import { library } from '@fortawesome/fontawesome-svg-core'
-// import { far } from "@fortawesome/free-regular-svg-icons";
-// import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
@@ -42,7 +39,8 @@ const App = (props) => {
   const popularStories = data.hn.topStories;
   const newStories = data.hn.newStories;
 
-  console.log(newStories);
+  console.log("new", newStories);
+  console.log("popularStories", popularStories);
 
   // Adding postId to localStorage
 
