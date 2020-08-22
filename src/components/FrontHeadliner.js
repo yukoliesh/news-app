@@ -8,7 +8,7 @@ import { HeadlinerColBox, LatestHeader, PopularHeader, HeadlinerColCont, MoreLat
 
 const FrontHeadliner = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
-  console.log( { loading, error, data });
+  // console.log( { loading, error, data });
   const topStories = data.hn.topStories;
   const newStories = data.hn.newStories;
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { MockedProvider } from '@apollo/client/react-testing';
+import { render, cleanup, wait } from '@testing-library/react';
+import { MockedProvider } from '@apollo/react-testing';
 import App from './App';
 import { NEWS_QUERY } from './apollo/query';
 
@@ -60,11 +60,14 @@ describe('App', () => {
       </MockedProvider>
     )
 
+    await wait();
+
     const titleElement = await findByTestId(container, 'today-news-title')
     // const titleContent = await findByText(titleElement, 'title')
 
-    // expect(titleElement).toBeTruthy()
+    expect(titleElement).toBeTruthy()
     // expect(titleContent).toBeTruthy()
+
   })
 
 })

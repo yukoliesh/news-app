@@ -27,10 +27,9 @@ const App = (props) => {
   const [theme, toggleTheme, componentMounted] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
-  console.log( { loading, error, data });
   if (loading) return <Loading />;
   if (error) {
-    console.log(error);
+    // console.log(error);
     return <ErrorPage />;
   }
   if (!data) return <p>Not found</p>;
@@ -39,8 +38,8 @@ const App = (props) => {
   const popularStories = data.hn.topStories;
   const newStories = data.hn.newStories;
 
-  console.log("new", newStories);
-  console.log("popularStories", popularStories);
+  // console.log("new", newStories);
+  // console.log("popularStories", popularStories);
 
   // Adding postId to localStorage
 
