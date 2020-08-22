@@ -83,7 +83,7 @@ const App = (props) => {
             <HeaderWrapper>
               <HeaderCont>
                 <HeadingLinkStyle to="/">
-                  <Header data-testid="today-news-title"><HeaderTodayText>Today's </HeaderTodayText>Tech News</Header>
+                  <Header aria-label="Today's Tech News"><HeaderTodayText>Today's </HeaderTodayText>Tech News</Header>
                 </HeadingLinkStyle>
                 <BorderLine />
                 <NavMenu />

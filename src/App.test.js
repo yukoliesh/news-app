@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, wait } from '@testing-library/react';
+import { render, cleanup, wait, getByRole } from '@testing-library/react';
 import { MockedProvider } from '@apollo/react-testing';
 import App from './App';
 import { NEWS_QUERY } from './apollo/query';
@@ -54,19 +54,24 @@ describe('App', () => {
   afterEach(cleanup)
 
   it('should render App title', async () => {
-    const { container } = render(
+    const { container,  getByRole} = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <App  />
       </MockedProvider>
     )
 
     await wait();
-
-    const titleElement = await findByTestId(container, 'today-news-title')
+    // expect(homeTitle).toHaveTextContent('Today\'\s Tech News')
+    // const { getByRole } = render(`<h1>Today's Tech News</h1>`)
+    // const homeTitle = getByRole('a')
+    // expect(alert).toHaveTextContent(/loading/i)
+    // const titleElement = await getByRole('h1', 'Today's Tech News')
     // const titleContent = await findByText(titleElement, 'title')
+    getByRole('h1', { name: 'Today\'\s Tech News' });
 
-    expect(titleElement).toBeTruthy()
-    // expect(titleContent).toBeTruthy()
+    // expect(getByRole).toBeTruthy()
+    // expect(getByRole).toHaveTextContent('today');
+
 
   })
 
