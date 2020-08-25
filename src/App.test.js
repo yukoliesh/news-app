@@ -1,8 +1,10 @@
 import React from 'react';
-import { render, cleanup, wait } from '@testing-library/react';
+import { render, cleanup, wait, getByRole, waitFor, waitForElement, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/react-testing';
 import App from './App';
 import { NEWS_QUERY } from './apollo/query';
+import { act } from 'react-dom/test-utils';
+import FrontHeadliner from './components/FrontHeadliner';
 
 // test('should render without error', () => {
 //   const { getByText } = render(<App />);
@@ -54,20 +56,38 @@ describe('App', () => {
   afterEach(cleanup)
 
   it('should render App title', async () => {
-    const { container } = render(
+    const { getByRole } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <App  />
       </MockedProvider>
     )
-
-    await wait();
-
-    const titleElement = await findByTestId(container, 'today-news-title')
-    // const titleContent = await findByText(titleElement, 'title')
-
-    expect(titleElement).toBeTruthy()
-    // expect(titleContent).toBeTruthy()
-
+    await waitFor(() => screen.getByRole('heading', { name: /today's tech news/i }))
   })
 
+  it('should render App Navigation', async () => {
+    const { getByText } = render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <App  />
+      </MockedProvider>
+    )
+    await waitFor(() => screen.getByText('Home'))
+    await waitFor(() => screen.findAllByText('Latest News'))
+    await waitFor(() => screen.findAllByText('Popular News'))
+    await waitFor(() => screen.getByText('Your Favorite'))
+    await waitFor(() => screen.getByText('Read Later'))
+  })
+
+  it('should render App and navigates to Latest News page when the Latest News button was clicked', async () => {
+    const { container, getByText, debug } = render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <App  />
+      </MockedProvider>
+    )
+    debug();
+    expect(container.innerHTML).toMatch('Today\'\s Tech News');
+    act(() => {
+      fireEvent.click(screen.getByText(/latest news/i));
+    });
+    await wait(container.innerHTML).toMatch('Latest News');
+  })
 })
