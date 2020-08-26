@@ -55,6 +55,14 @@ const mocks = [
 describe('App', () => {
   afterEach(cleanup)
 
+  // For setting up the localStorage
+  const localStorageMock = {
+    getItem: jest.fn(),
+    setItem: jest.fn(),
+    clear: jest.fn()
+  };
+  global.localStorage = localStorageMock;
+
   it('should render App title', async () => {
     const { getByRole } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
@@ -122,5 +130,20 @@ describe('App', () => {
     });
   })
 
+  it('should save locally when the favorite (heart) icon is clicked and should render in Your Favorite page', async () => {
+    const { getByText, findAllByText, container, getByTestId } = render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <App  />
+      </MockedProvider>
+    )
+    expect(screen.getByTestId("loading-dots")).toBeInTheDocument();
+    await waitFor(() => screen.getByRole('heading', { name: /today's tech news/i }))
+    await waitFor(() => screen.getByTestId('favorite-icon'));  
+    act(() => {
+      fireEvent.click(screen.getByTestId('favorite-icon'));
+    });
+    expect(window.localStorage.getItem).toHaveBeenCalledTimes(1);
+  })
+  
   
 })

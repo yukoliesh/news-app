@@ -15,13 +15,13 @@ const NewsItem = (props) => {
         <Box>{props.timeISO}</Box>
       </Box>
       <Box col>
-        <HeartIcon onClick={props.onFavoriteClick}>
+        <HeartIcon onClick={props.onFavoriteClick} data-testid="favorite-icon">
           <i className="far fa-heart"></i>
         </HeartIcon>
       </Box>
       <Box col>
-        <ReadLaterIcon onClick={props.onBookmarkClick}>
-        <i className="far fa-bookmark"></i>
+        <ReadLaterIcon onClick={props.onBookmarkClick} data-testid="bookmark-icon">
+          <i className="far fa-bookmark"></i>
         </ReadLaterIcon>
       </Box>
     </Box>

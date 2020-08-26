@@ -55,7 +55,6 @@ const App = (props) => {
     if (!isPost) {
       setFavorites([...favorites, post])
     }
-    console.log("hi");
   }
 
   const addReadLaters = (post) => {
