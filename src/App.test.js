@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, wait, getByRole, waitFor, waitForElement, screen } from '@testing-library/react';
+import { render, cleanup, wait, getByRole, waitFor, waitForElement, screen, fireEvent } from '@testing-library/react';
 import { MockedProvider } from '@apollo/react-testing';
 import App from './App';
 import { NEWS_QUERY } from './apollo/query';
@@ -43,11 +43,11 @@ const mocks = [
 ]
 
 // What to test
-// Does it render the title
-// Does it render the navigatioin
-// Does it render the latest news title, time, url
-// Does the More Latest News button lead you to Latest News page
-// Does the More Popular News button lead you to Popular News page
+// Does it render the title (check)
+// Does it render the navigatioin (check)
+// Does it render the popular news title, time, url (check)
+// Does the More Latest News button lead you to Latest News page (check)
+// Does the More Popular News button lead you to Popular News page (do I need to check that? duplicates?)
 // Is the favorite icon clickable and save the title, url and time to Favorite page
 // Is the Bookmark icon clickable and save the title, url and time to Read Later page
 // Can Dark Mode change the theme
@@ -61,33 +61,66 @@ describe('App', () => {
         <App  />
       </MockedProvider>
     )
+    expect(screen.getByTestId("loading-dots")).toBeInTheDocument();
     await waitFor(() => screen.getByRole('heading', { name: /today's tech news/i }))
   })
-
-  it('should render App Navigation', async () => {
-    const { getByText } = render(
+  
+  it('should render App and navigates to Popular News page when the More Popular News button was clicked', async () => {
+    const { container, getByText, getByTestId, getByRole } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <App  />
       </MockedProvider>
     )
+    expect(screen.getByTestId("loading-dots")).toBeInTheDocument();
+    await waitFor(() => screen.getByRole('heading', { name: /today's tech news/i }));
+    expect(container.innerHTML).toMatch('Popular News');
+    act(() => {
+      fireEvent.click(screen.getByTestId('more-popular-btn'));
+    });
+    await waitFor(() => screen.getByRole('heading', { name: /Popular News/i }));
+    expect(container.innerHTML).toMatch('Popular News');
+  })
+
+  it('should render App Navigation and navigates to the destination', async () => {
+    const { getByText, findAllByText, container, getByTestId } = render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <App  />
+      </MockedProvider>
+    )
+    expect(screen.getByTestId("loading-dots")).toBeInTheDocument();
     await waitFor(() => screen.getByText('Home'))
     await waitFor(() => screen.findAllByText('Latest News'))
     await waitFor(() => screen.findAllByText('Popular News'))
     await waitFor(() => screen.getByText('Your Favorite'))
     await waitFor(() => screen.getByText('Read Later'))
+
+    expect(container.innerHTML).toMatch('Popular News');
+    act(() => {
+      fireEvent.click(screen.getByTestId('popular-header-nav'));
+    });
+    expect(container.innerHTML).toMatch('Popular News');
   })
 
-  it('should render App and navigates to Latest News page when the Latest News button was clicked', async () => {
-    const { container, getByText, debug } = render(
+  it('should render Popular News Page and should see the Popular news title and its post time and the title is clickable', async () => {
+    const { getByText, findAllByText, container, getByTestId } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <App  />
       </MockedProvider>
     )
-    debug();
-    expect(container.innerHTML).toMatch('Today\'\s Tech News');
+    expect(screen.getByTestId("loading-dots")).toBeInTheDocument();
+    await waitFor(() => screen.findAllByText('Popular News'))
+
+    expect(container.innerHTML).toMatch('Popular News');
     act(() => {
-      fireEvent.click(screen.getByText(/latest news/i));
+      fireEvent.click(screen.getByTestId('popular-header-nav'));
     });
-    await wait(container.innerHTML).toMatch('Latest News');
+    expect(container.innerHTML).toMatch('Popular News');
+    expect(getByText('Secret Gyms and the Economics of Prohibition')).toBeInTheDocument();
+    expect(getByText('2020-08-19 15:29:44')).toBeInTheDocument();
+    act(() => {
+      fireEvent.click(screen.getByText('Secret Gyms and the Economics of Prohibition'));
+    });
   })
+
+  
 })

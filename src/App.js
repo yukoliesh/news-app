@@ -38,15 +38,14 @@ const App = (props) => {
   const popularStories = data.hn.topStories;
   const newStories = data.hn.newStories;
 
-  // console.log("new", newStories);
-  // console.log("popularStories", popularStories);
-
   // Adding postId to localStorage
 
   /**
    * Adds a new post to state
    * @param {{ id: string, url: string}} post 
    */
+
+  // let clicks = 0;
   const addFavorite = (post) => {
     // for checking undefined or any falsy value
     if (!post) {
@@ -56,6 +55,7 @@ const App = (props) => {
     if (!isPost) {
       setFavorites([...favorites, post])
     }
+    console.log("hi");
   }
 
   const addReadLaters = (post) => {
@@ -134,7 +134,7 @@ const App = (props) => {
                 <HeadlinerColBox>
                   <FavoriteHeader>Your Favorite</FavoriteHeader>
                   {favorites && favorites.map(item => 
-                    <YourFavorite id={item.id} url={item.url} title={item.title} timeISO={item.timeISO} />
+                    <YourFavorite id={item.id} key={item.id} url={item.url} title={item.title} timeISO={item.timeISO} />
                   )}
                 </HeadlinerColBox>
               </Route>
@@ -142,7 +142,7 @@ const App = (props) => {
                 <HeadlinerColBox>
                   <FavoriteHeader>Read Later</FavoriteHeader>
                   {readlaters && readlaters.map(item => 
-                    <ReadLater id={item.id} url={item.url} title={item.title} timeISO={item.timeISO} />
+                    <ReadLater id={item.id} key={item.id} url={item.url} title={item.title} timeISO={item.timeISO} />
                   )}
                 </HeadlinerColBox>
               </Route>

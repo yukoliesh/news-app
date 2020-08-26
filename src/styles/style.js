@@ -174,6 +174,7 @@ export const HeartIcon = styled.button`
   background: none;
   cursor: pointer;
   outline: none;
+  font-size: 1.2em;
   color: ${({ theme }) => theme.heartIcon};
 `;
 // Read Later icon
@@ -182,6 +183,7 @@ export const ReadLaterIcon = styled.button`
   background: none;
   cursor: pointer;
   outline: none;
+  font-size: 1.2em;
   color: ${({ theme }) => theme.bookmarkIcon};
 `;
 

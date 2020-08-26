@@ -2,10 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, HyperLinkStyle, NewsTitleEllipsisBox, HeartIcon, ReadLaterIcon }  from '../styles/style';
 
-// get our fontawesome imports
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-// import { far } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NewsItem = (props) => {
   return (
@@ -19,14 +15,13 @@ const NewsItem = (props) => {
         <Box>{props.timeISO}</Box>
       </Box>
       <Box col>
-        <FontAwesomeIcon icon={faHeart} />
         <HeartIcon onClick={props.onFavoriteClick}>
-          <i id={props.id} className="fa fa-heart-o fa-lg"></i>
+          <i className="far fa-heart"></i>
         </HeartIcon>
       </Box>
       <Box col>
         <ReadLaterIcon onClick={props.onBookmarkClick}>
-          <i id={props.id} className="fa fa-bookmark-o fa-lg"></i>
+        <i className="far fa-bookmark"></i>
         </ReadLaterIcon>
       </Box>
     </Box>

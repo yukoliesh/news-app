@@ -6,19 +6,19 @@ const NavMenu = (props) => {
   return (
       <NavCont>
         <NavItem>
-          <LinkStyle to="/">Home</LinkStyle>
+          <LinkStyle to="/" data-testid="home-header-nav">Home</LinkStyle>
         </NavItem>
         <NavItem>
-          <LinkStyle to="/LatestNews">Latest News</LinkStyle>
+          <LinkStyle to="/LatestNews" data-testid="latest-header-nav">Latest News</LinkStyle>
         </NavItem>
         <NavItem>
-          <LinkStyle to="/PopularNews">Popular News</LinkStyle>
+          <LinkStyle to="/PopularNews" data-testid="popular-header-nav">Popular News</LinkStyle>
         </NavItem>
         <NavItem>
-          <LinkStyle to="/YourFavorite">Your Favorite</LinkStyle>
+          <LinkStyle to="/YourFavorite" data-testid="favorite-header-nav">Your Favorite</LinkStyle>
         </NavItem>
         <NavItem>
-          <LinkStyle to="/ReadLater">Read Later</LinkStyle>
+          <LinkStyle to="/ReadLater" data-testid="readlater-header-nav">Read Later</LinkStyle>
         </NavItem>
       </NavCont>
   );
