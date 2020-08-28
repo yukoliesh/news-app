@@ -25,11 +25,14 @@ const FrontHeadliner = (props) => {
     if (!post) {
       return;
     }
+    // Do we have any duplicates? check-in
     const isPost = favorites.some(fav => fav.id === post.id)
+    // If we don't have any duplicates then, set Favorites array with the object that the user clicked
     if (!isPost) {
       setFavorites([...favorites, post])
     }
-    console.log("hey");
+    const favicon = document.getElementById("favicon-" + post.id);
+    favicon.setAttribute("class", "fas fa-heart");
   }
 
   const addReadLaters = (post) => {
@@ -41,6 +44,8 @@ const FrontHeadliner = (props) => {
     if (!isPost) {
       setReadLaters([...readlaters, post])
     }
+    const bmIcon = document.getElementById("bookmarkicon-" + post.id);
+    bmIcon.setAttribute("class", "fas fa-bookmark");
   }
   
   return (
@@ -51,6 +56,7 @@ const FrontHeadliner = (props) => {
           <Box mt={5} pb={4}>
           {newStories && limitNewStories.map(item => 
             <NewsItem 
+              id={item.id}
               title={item.title} 
               timeISO={formatDate(item.timeISO)} 
               url={item.url} 
@@ -70,6 +76,7 @@ const FrontHeadliner = (props) => {
           <Box mt={5} pb={4}>
           {topStories && limitTopStories.map(item => 
             <NewsItem 
+              id={item.id}
               title={item.title} 
               timeISO={formatDate(item.timeISO)} 
               url={item.url} 
@@ -92,7 +99,9 @@ FrontHeadliner.propTypes = {
   id: PropTypes.string,
   url: PropTypes.string,
   title: PropTypes.string,
-  timeISO: PropTypes.string
+  timeISO: PropTypes.string,
+  onFavoriteClick: PropTypes.func,
+  onBookmarkClick: PropTypes.func
 };
 
 export default FrontHeadliner;

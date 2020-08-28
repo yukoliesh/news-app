@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, HyperLinkStyle, NewsTitleEllipsisBox, HeartIcon, ReadLaterIcon }  from '../styles/style';
 
-
 const NewsItem = (props) => {
   return (
     <Box row mb={4}>
@@ -16,12 +15,12 @@ const NewsItem = (props) => {
       </Box>
       <Box col>
         <HeartIcon onClick={props.onFavoriteClick} data-testid="favorite-icon">
-          <i className="far fa-heart"></i>
+          <i className="far fa-heart" id={"favicon-" + props.id} data-testid={"favicon-" + props.id}></i>
         </HeartIcon>
       </Box>
       <Box col>
         <ReadLaterIcon onClick={props.onBookmarkClick} data-testid="bookmark-icon">
-          <i className="far fa-bookmark"></i>
+          <i className="far fa-bookmark" id={"bookmarkicon-" + props.id}></i>
         </ReadLaterIcon>
       </Box>
     </Box>

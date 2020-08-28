@@ -23,6 +23,7 @@ const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
   const [favorites, setFavorites] = useLocalStorage('favorites', []);
   const [readlaters, setReadLaters] = useLocalStorage('readlaters', []);
+  // const [favicon, setFavIcon] = useLocalStorage('favicon', []);
 
   const [theme, toggleTheme, componentMounted] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
@@ -55,6 +56,9 @@ const App = (props) => {
     if (!isPost) {
       setFavorites([...favorites, post])
     }
+    const favicon = document.getElementById("favicon-" + post.id);
+    favicon.setAttribute("class", "fas fa-heart");
+    // setFavIcon(post.id);
   }
 
   const addReadLaters = (post) => {
@@ -66,6 +70,8 @@ const App = (props) => {
     if (!isPost) {
       setReadLaters([...readlaters, post])
     }
+    const bmIcon = document.getElementById("bookmarkicon-" + post.id);
+    bmIcon.setAttribute("class", "fas fa-bookmark");
   }
 
   // This is for DarkMode - to check if darkmode component has mounted or not.
@@ -115,7 +121,7 @@ const App = (props) => {
                 </HeadlinerColBox>
               </Route>
               <Route path="/PopularNews">
-               <HeadlinerColBox>
+               <HeadlinerColBox data-testid="more-popular-news">
                   <PopularHeader>Popular News</PopularHeader>
                   {popularStories && popularStories.map(item => 
                     <PopularNews 
