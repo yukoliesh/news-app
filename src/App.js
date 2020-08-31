@@ -23,14 +23,14 @@ const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
   const [favorites, setFavorites] = useLocalStorage('favorites', []);
   const [readlaters, setReadLaters] = useLocalStorage('readlaters', []);
-  // const [favicon, setFavIcon] = useLocalStorage('favicon', []);
+  const [favicon, setFavIcon] = useLocalStorage('favicon', []);
+  const [bmicon, setBmIcon] = useLocalStorage('bmicon', []);
 
   const [theme, toggleTheme, componentMounted] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
   if (loading) return <Loading />;
   if (error) {
-    // console.log(error);
     return <ErrorPage />;
   }
   if (!data) return <p>Not found</p>;
@@ -45,7 +45,7 @@ const App = (props) => {
    * Adds a new post to state
    * @param {{ id: string, url: string}} post 
    */
-
+  
   // let clicks = 0;
   const addFavorite = (post) => {
     // for checking undefined or any falsy value
@@ -55,10 +55,12 @@ const App = (props) => {
     const isPost = favorites.some(fav => fav.id === post.id)
     if (!isPost) {
       setFavorites([...favorites, post])
+      setFavIcon([...favicon, post.id]);
     }
-    const favicon = document.getElementById("favicon-" + post.id);
-    favicon.setAttribute("class", "fas fa-heart");
-    // setFavIcon(post.id);
+    
+    const faviconEle = document.getElementById("favicon-" + post.id);
+    faviconEle.setAttribute("class", "fas fa-heart");
+    
   }
 
   const addReadLaters = (post) => {
@@ -69,6 +71,7 @@ const App = (props) => {
     const isPost = readlaters.some(laters => laters.id === post.id)
     if (!isPost) {
       setReadLaters([...readlaters, post])
+      setBmIcon([...bmicon, post.id])
     }
     const bmIcon = document.getElementById("bookmarkicon-" + post.id);
     bmIcon.setAttribute("class", "fas fa-bookmark");
@@ -78,7 +81,7 @@ const App = (props) => {
   if (!componentMounted) {
     return <div />
   };
-  
+
   return (
     <Router>
       <ThemeProvider theme={themeMode}>
@@ -138,15 +141,17 @@ const App = (props) => {
               <Route path="/YourFavorite">
                 <HeadlinerColBox>
                   <FavoriteHeader>Your Favorite</FavoriteHeader>
-                  {favorites && favorites.map(item => 
+                  {favorites.length === 0 && ("You haven't marked any article as Your Favorite yet.")}
+                  {favorites && favorites.length >= 1 && favorites.map(item => 
                     <YourFavorite id={item.id} key={item.id} url={item.url} title={item.title} timeISO={item.timeISO} />
                   )}
                 </HeadlinerColBox>
               </Route>
               <Route path="/ReadLater">
                 <HeadlinerColBox>
-                  <FavoriteHeader>Read Later</FavoriteHeader>
-                  {readlaters && readlaters.map(item => 
+                  <PopularHeader>Read Later</PopularHeader>
+                  {readlaters.length === 0 && "You haven't marked any article as Read Later yet."}
+                  {readlaters && readlaters.length >= 1 && readlaters.map(item => 
                     <ReadLater id={item.id} key={item.id} url={item.url} title={item.title} timeISO={item.timeISO} />
                   )}
                 </HeadlinerColBox>

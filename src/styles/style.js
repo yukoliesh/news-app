@@ -140,12 +140,14 @@ const MoreButtonStyle = css`
 export const MoreLatestButton = styled(Link)`
   ${MoreButtonStyle}
   background-color: ${({ theme }) => theme.latestColor};
-  color: ${lm_white};
+  color: ${({ theme }) => theme.moreBtnTxtColor};
+  font-weight: 600;
 `;
 export const MorePopularButton = styled(Link)`
   ${MoreButtonStyle}
   background-color: ${({ theme }) => theme.popularColor};
-  color: ${lm_white};
+  color: ${({ theme }) => theme.moreBtnTxtColor};
+  font-weight: 600;
 `;
 
 
@@ -201,4 +203,9 @@ export const SavedItems = styled.ol`
 export const SavedItem = styled.li`
   list-style: none;
   line-height: 1.5
+`;
+
+export const ReadLaterHeader = styled.h2`
+  ${pageHeaderFontStyle}
+  color: ${({ theme }) => theme.readlaterColor};
 `;

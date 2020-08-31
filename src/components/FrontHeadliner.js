@@ -5,12 +5,21 @@ import { NEWS_QUERY } from '../apollo/query';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import NewsItem from './NewsItem';
 import { formatDate } from '../utils';
+import Loading from "../Loading";
+import ErrorPage from "../ErrorPage";
 import { HeadlinerColBox, LatestHeader, PopularHeader, HeadlinerColCont, MoreLatestButton, CenterBox, MorePopularButton, Box }  from '../styles/style';
 
 const FrontHeadliner = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
   const [favorites, setFavorites] = useLocalStorage('favorites', []);
   const [readlaters, setReadLaters] = useLocalStorage('readlaters', []);
+
+  
+  if (loading) return <Loading />;
+  if (error) {
+    return <ErrorPage />;
+  }
+  if (!data) return <p>Not found</p>;
 
   // console.log( { loading, error, data });
   const topStories = data.hn.topStories;
