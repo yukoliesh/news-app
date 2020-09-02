@@ -20,17 +20,17 @@ export const lightTheme = {
   text: '#363537',
   headerBg: 'rgb(65,0,250)',
   headerGradient: 'linear-gradient(144deg, rgba(65,0,250,1) 0%, rgba(124,240,248,1) 100%)',
+  headerNavLink: "#fff",
   toggleBorder: '#fff',
   gradient: 'linear-gradient(#39598A, #79D7ED)',
-  wrapperBg: '#fff',
+  wrapperBg: 'rgb(255,255,255,0.9)',
   latestColor: '#313EB0',
   popularColor: '#27793E',
   moreBtnTxtColor: '#fff',
   headlinerBg: '#fff',
   titleLink: '#5B17B1',
-  titleLinkHover: '#333',
-  heartIcon: "#4d4d4d",
-  bookmarkIcon: '#4d4d4d',
+  titleLinkHover: '#4100FA',
+  icon: "#4d4d4d",
   boxShadow: '0px 30px 30px 0px rgba(125,125,125,1);'
 }
 
@@ -39,16 +39,16 @@ export const darkTheme = {
   text: '#FAFAFA',
   headerBg: 'rgb(20,13,242)',
   headerGradient: 'linear-gradient(155deg, rgba(20,13,242,1) 0%, rgba(160,16,228,1) 67%)',
+  headerNavLink: "#fff",
   toggleBorder: '#6B8096',
   gradient: 'linear-gradient(#091236, #1E215D)',
-  wrapperBg: '#282D4F',
+  wrapperBg: 'rgb(40,45,79,0.9)',
   latestColor: '#F89ABA',
   popularColor: '#FCC195',
   moreBtnTxtColor: '#444',
   readlaterColor: '#ff740d',
   headlinerBg: '#353D71',
   titleLink: '#fff',
-  titleLinkHover: '#A010E4',
-  heartIcon: "#fff",
-  bookmarkIcon: '#fff'
+  titleLinkHover: '#F89ABA',
+  icon: "#fff"
 }

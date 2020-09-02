@@ -21,7 +21,6 @@ const FrontHeadliner = (props) => {
   }
   if (!data) return <p>Not found</p>;
 
-  // console.log( { loading, error, data });
   const topStories = data.hn.topStories;
   const newStories = data.hn.newStories;
 
@@ -58,7 +57,7 @@ const FrontHeadliner = (props) => {
   }
   
   return (
-      <HeadlinerColBox row m={3}>
+    <HeadlinerColBox row m={3}>
       <Box col={{ xs: 1, md: 1 / 2 }} p={2}> 
         <HeadlinerColCont>
           <LatestHeader>Latest News</LatestHeader>
@@ -100,7 +99,6 @@ const FrontHeadliner = (props) => {
         </HeadlinerColCont>
       </Box>
     </HeadlinerColBox>
-    
   );
 }
 

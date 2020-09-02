@@ -9,6 +9,13 @@ export const displayflex = css`
   justify-content: center;
   box-sizing: border-box;
 `;
+export const displayflexMobile = css`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+`;
 // Background
 export const bg = styled.div`
   height: 60vh;
