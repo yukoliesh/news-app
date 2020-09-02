@@ -46,16 +46,6 @@ const mocks = [
 describe('App', () => {
   afterEach(cleanup)
 
-  beforeEach(() => {
-    Object.defineProperty(window, "localStorage", {
-      value: {
-        getItem: jest.fn(() => null),
-        setItem: jest.fn(() => null)
-      },
-      writable: true
-    });
-  });
-
   it('should render loading page', async () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
@@ -148,30 +138,21 @@ describe('App', () => {
       fireEvent.click(screen.getByText('Secret Gyms and the Economics of Prohibition'));
     });
   })
-
-  it('should call localStorage getItem on render', async () => {
-    render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <App  />
-      </MockedProvider>
-    )
-    expect(window.localStorage.getItem).toHaveBeenCalledTimes(3);
-  })
   
-  it("should call localStorage setItem for light theme mode to dark theme mode when it's clicked", async () => {
-    const { getByTestId } = render( 
+  it("should turn the color theme from Light Mode to Dark Mode when the modeToggle is clicked", async () => {
+    const { getByTestId, getByText } = render( 
       <MockedProvider mocks={mocks} addTypename={false}>
         <App  />
       </MockedProvider>
     );
 
     await screen.findByTestId("today-news-title");
+    expect(getByText("Light Mode")).toBeInTheDocument();
     const modeToggle = getByTestId("mode-toggle");
-    fireEvent.click(modeToggle, { target: { value: "dark"
-     } });
-
-    expect(window.localStorage.setItem).toHaveBeenCalledTimes(2);
-    expect(window.localStorage.setItem).toHaveBeenNthCalledWith(2, "theme", "dark");
+    act(() => {
+      fireEvent.click(modeToggle);
+    })
+    expect(getByText("Dark Mode")).toBeInTheDocument();
   });
 
   // change the name of the test
