@@ -20,11 +20,10 @@ const LatestNews = (props) => {
   return (
     <Box>
       <NewsItem 
-        id={props.latestNewsId}
-        title={props.latestNewsTitle} 
-        timeISO={props.latestTime} 
-        url={props.latestUrl} 
-        key={props.latestKey} 
+        id={props.id}
+        title={props.title} 
+        timeISO={props.timeISO} 
+        url={props.url}
         onFavoriteClick={props.onFavoriteClick} 
         onBookmarkClick={props.onBookmarkClick} />
     </Box>
@@ -32,10 +31,10 @@ const LatestNews = (props) => {
 }
 
 LatestNews.propTypes = {
-  latestNewsId: PropTypes.string,
-  latestUrl: PropTypes.string,
-  latestNewsTitle: PropTypes.string,
-  latestTime: PropTypes.string,
+  id: PropTypes.string,
+  url: PropTypes.string,
+  title: PropTypes.string,
+  timeISO: PropTypes.string,
   onFavoriteClick: PropTypes.func,
   onBookmarkClick: PropTypes.func
 };

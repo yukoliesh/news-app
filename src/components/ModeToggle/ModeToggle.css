@@ -21,8 +21,8 @@
 .react-switch-label .react-switch-button {
   content: '';
   position: absolute;
-  top: 2px;
-  left: 2px;
+  top: 1px;
+  left: 32px;
   width: 30px;
   height: 30px;
   border-radius: 30px;

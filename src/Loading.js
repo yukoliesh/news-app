@@ -6,7 +6,7 @@ const Loading = (props) => {
   return (
     <React.Fragment>
       <LoadingStyle>
-        <div className="lds-ellipsis">
+        <div className="lds-ellipsis" data-testid="loading-dots">
           <div></div>
           <div></div>
           <div></div>

@@ -22,11 +22,10 @@ const PopularNews = (props) => {
   return (
     <Box>
       <NewsItem 
-        id={props.popularId}
-        title={props.popularNewsTitle} 
-        timeISO={props.popularTime} 
-        url={props.popularUrl} 
-        key={props.popularKey} 
+        id={props.id}
+        title={props.title} 
+        timeISO={props.timeISO} 
+        url={props.url}
         onFavoriteClick={props.onFavoriteClick} 
         onBookmarkClick={props.onBookmarkClick} />
     </Box>
@@ -34,10 +33,10 @@ const PopularNews = (props) => {
 }
 
 PopularNews.propTypes = {
-  popularId: PropTypes.string,
-  popularUrl: PropTypes.string,
-  popularNewsTitle: PropTypes.string,
-  popularTime: PropTypes.string,
+  id: PropTypes.string,
+  url: PropTypes.string,
+  title: PropTypes.string,
+  timeISO: PropTypes.string,
   onFavoriteClick: PropTypes.func,
   onBookmarkClick: PropTypes.func
 };

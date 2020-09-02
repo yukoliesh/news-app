@@ -20,17 +20,3 @@ export const NEWS_QUERY = gql`
     }
   }
 `;
-
-export const SAVE_QUERY = gql`
-  mutation SavePostMutation($id: INT!)
-  {
-    hn{
-      item(id: $id){
-        id
-        title
-        url
-        timeISO
-      }
-    }
-  }
-`;
