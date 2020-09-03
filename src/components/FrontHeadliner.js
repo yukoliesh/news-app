@@ -17,8 +17,9 @@ const FrontHeadliner = (props) => {
   
   if (loading) return <Loading />;
   if (error) {
+    console.error(error);
     return <ErrorPage />;
-  }
+  } 
   if (!data) return <p>Not found</p>;
 
   const topStories = data.hn.topStories;
@@ -34,9 +35,9 @@ const FrontHeadliner = (props) => {
       return;
     }
     // Do we have any duplicates? check-in
-    const isPost = favorites.some(fav => fav.id === post.id)
+    const matchingPostFound = favorites.some(fav => fav.id === post.id)
     // If we don't have any duplicates then, set Favorites array with the object that the user clicked
-    if (!isPost) {
+    if (!matchingPostFound) {
       setFavorites([...favorites, post])
     }
     const favicon = document.getElementById("favicon-" + post.id);
@@ -48,8 +49,8 @@ const FrontHeadliner = (props) => {
     if (!post) {
       return;
     }
-    const isPost = readlaters.some(laters => laters.id === post.id)
-    if (!isPost) {
+    const matchingPostFound = readlaters.some(laters => laters.id === post.id)
+    if (!matchingPostFound) {
       setReadLaters([...readlaters, post])
     }
     const bmIcon = document.getElementById("bookmarkicon-" + post.id);

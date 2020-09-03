@@ -20,6 +20,7 @@ import { ContentWrapper, HeaderWrapper, Header, BorderLine, HeadingLinkStyle, Ba
 import { GlobalStyles } from './styles/global';
 import { formatDate } from './utils';
 import { NavMenuMobile } from "./components/NavMenuMobile";
+import { Footer } from "./components/Footer";
 
 const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
@@ -56,8 +57,8 @@ const App = (props) => {
     if (!post) {
       return;
     }
-    const isPost = favorites.some(fav => fav.id === post.id)
-    if (!isPost) {
+    const matchingPostFound = favorites.some(fav => fav.id === post.id)
+    if (!matchingPostFound) {
       setFavorites([...favorites, post])
       setFavIcon([...favicon, post.id]);
     }
@@ -72,8 +73,8 @@ const App = (props) => {
     if (!post) {
       return;
     }
-    const isPost = readlaters.some(laters => laters.id === post.id)
-    if (!isPost) {
+    const matchingPostFound = readlaters.some(laters => laters.id === post.id)
+    if (!matchingPostFound) {
       setReadLaters([...readlaters, post])
       setBmIcon([...bmicon, post.id])
     }
@@ -92,7 +93,7 @@ const App = (props) => {
         <GlobalStyles />
         <Background>
           <ContentWrapper>
-            <HeaderWrapper>
+            <HeaderWrapper role="banner">
             {!isMobileOnly && (
               <HeaderCont>
                 <HeadingLinkStyle to="/">
@@ -127,7 +128,7 @@ const App = (props) => {
               </HeaderCont>
             )}
             </HeaderWrapper>
-            <MainWrapper>
+            <MainWrapper role="main">
               <Switch>
                 <Route exact path="/">
                   <FrontHeadliner />
@@ -185,6 +186,7 @@ const App = (props) => {
             {isMobileOnly && opened && (
               <NavMenuMobile handleClickOpen={() => setOpened(false)} />
             )}
+            <Footer />
           </ContentWrapper>
         </Background>
       </ThemeProvider>

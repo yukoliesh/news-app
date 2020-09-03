@@ -22,12 +22,12 @@ export const ContentWrapper = styled.div`
   @media (max-width: 43em) {
     width: 100%;
     min-height: 100vh;
-    padding-bottom: 3em;  
+    padding-bottom: 1em;  
     border-radius: 0;
   }
 `;
 
-export const HeaderWrapper = styled.div`
+export const HeaderWrapper = styled.header`
   ${displayflex}
   background: ${({ theme }) => theme.headerBg};
   background: ${({ theme }) => theme.headerGradient};
@@ -75,7 +75,7 @@ export const BorderLine = styled.div`
   }
 `;
 
-export const MainWrapper = styled.div`
+export const MainWrapper = styled.main`
   ${displayflex}
   padding: 2em 4em; 
   @media (max-width: 43em){
@@ -278,4 +278,25 @@ export const NavModal = styled.nav`
   z-index: 1;
   height: 100vh;
   width: 100%;
+`;
+
+/* Footer */
+
+export const FooterStyle = styled.footer`
+  ${displayflex}
+  padding: 0 1em;
+  height: 15vh;
+  font-size: 0.8em;
+  & p{
+    margin: 0;
+    line-height: 1.5;
+  }
+  .name{
+    font-weight: 600;
+    line-height: 3;
+    letter-spacing: .3rem;
+  }
+  .copyright{
+    font-style: italic;
+  }
 `;

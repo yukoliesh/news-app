@@ -11,6 +11,7 @@ const ModeToggle = ({isOn, handleToggle, onColor}) => {
         id={`react-switch-new`}
         type="checkbox"
         data-testid="mode-toggle"
+        aria-label="Select to change the color theme"
       />
       <label
         style={{background: isOn && onColor}}

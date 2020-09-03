@@ -4,7 +4,7 @@ import { NavCont, NavItem, LinkStyle }  from '../styles/style';
 
 const NavMenu = (props) => {
   return (
-    <React.Fragment>
+    <nav role="navigation">
       {!isMobileOnly && (
         <NavCont>
           <NavItem>
@@ -24,7 +24,7 @@ const NavMenu = (props) => {
           </NavItem>
       </NavCont>
       )}
-    </React.Fragment>
+    </nav>
   )
   }
   export default NavMenu;

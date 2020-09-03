@@ -11,8 +11,9 @@ const LatestNews = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
   // Loading
   if (loading) return <Loading />;
+  // Error
   if (error) {
-    console.log(error);
+    console.error(error);
     return <ErrorPage />;
   } 
   if (!data) return <p>Not found</p>;

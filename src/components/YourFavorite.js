@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, HyperLinkStyle, SavedItems, SavedItem }  from '../styles/style';
 
-
 const YourFavorite = (props) => {
 
   return (
