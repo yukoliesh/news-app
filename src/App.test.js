@@ -3,7 +3,6 @@ import { render, cleanup,  waitFor, screen, fireEvent } from '@testing-library/r
 import { MockedProvider } from '@apollo/react-testing';
 import App from './App';
 import { NEWS_QUERY } from './apollo/query';
-import { act } from 'react-dom/test-utils';
 
 const mocks = [
   {
@@ -62,7 +61,7 @@ describe('App', () => {
       </MockedProvider>
     )
     await screen.findByTestId("today-news-title");
-    await waitFor(() => screen.getByRole('heading', { name: /today's tech news/i }))
+    await screen.getByRole('heading', { name: /today's tech news/i })
   })
   
   it('should render App and navigates to Popular News page when the More Popular News button was clicked', async () => {
@@ -72,11 +71,9 @@ describe('App', () => {
       </MockedProvider>
     )
     await screen.findByTestId("today-news-title");
-    await waitFor(() => screen.getByRole('heading', { name: /today's tech news/i }));
+    await screen.getByRole('heading', { name: /today's tech news/i })
     expect(container.innerHTML).toMatch('Popular News');
-    act(() => {
-      fireEvent.click(screen.getByTestId('more-popular-btn'));
-    });
+    fireEvent.click(screen.getByTestId('more-popular-btn'));
     const header = await screen.findByTestId('more-popular-news');
     expect(header).toBeInTheDocument();
   })
@@ -88,35 +85,27 @@ describe('App', () => {
       </MockedProvider>
     )
     await screen.findByTestId("today-news-title");
-    await waitFor(() => screen.getByText('Home'))
-    await waitFor(() => screen.findAllByText('Latest News'))
-    await waitFor(() => screen.findAllByText('Popular News'))
-    await waitFor(() => screen.getByText('Your Favorite'))
-    await waitFor(() => screen.getByText('Read Later'))
+    await screen.findByText("Home");
+    await screen.findByText("Latest News");
+    await screen.findByTestId("popular-header-nav");
+    await screen.findByText("Your Favorite");
+    await screen.findByText("Read Later");
 
     // Popular News
     expect(screen.getByTestId('popular-header-nav')).toBeInTheDocument();
-    act(() => {
-      fireEvent.click(screen.getByTestId('popular-header-nav'));
-    });
+    fireEvent.click(screen.getByTestId('popular-header-nav'));
     expect(container.innerHTML).toMatch('Popular News');
     // Latest News
     expect(screen.getByTestId('latest-header-nav')).toBeInTheDocument();
-    act(() => {
-      fireEvent.click(screen.getByTestId('latest-header-nav'));
-    });
+    fireEvent.click(screen.getByTestId('latest-header-nav'));
     expect(container.innerHTML).toMatch('Latest News');
     // Your Favorite 
     expect(screen.getByTestId('favorite-header-nav')).toBeInTheDocument();
-    act(() => {
-      fireEvent.click(screen.getByTestId('favorite-header-nav'));
-    });
+    fireEvent.click(screen.getByTestId('favorite-header-nav'));
     expect(container.innerHTML).toMatch('Your Favorite');
     // Read Later
     expect(screen.getByTestId('readlater-header-nav')).toBeInTheDocument();
-    act(() => {
-      fireEvent.click(screen.getByTestId('readlater-header-nav'));
-    });
+    fireEvent.click(screen.getByTestId('readlater-header-nav'));
     expect(container.innerHTML).toMatch('Read Later');
   })
 
@@ -127,16 +116,12 @@ describe('App', () => {
       </MockedProvider>
     )
     await screen.findByTestId("today-news-title");
-    await waitFor(() => screen.findByTestId('popular-header-nav'))
-    act(() => {
-      fireEvent.click(screen.getByTestId('popular-header-nav'));
-    });
+    await screen.findByTestId('popular-header-nav')
+    fireEvent.click(screen.getByTestId('popular-header-nav'));
     expect(getByTestId('more-popular-news')).toBeInTheDocument();
     expect(getByText('Secret Gyms and the Economics of Prohibition')).toBeInTheDocument();
     expect(getByText('2020-08-19 15:29:44')).toBeInTheDocument();
-    act(() => {
-      fireEvent.click(screen.getByText('Secret Gyms and the Economics of Prohibition'));
-    });
+    fireEvent.click(screen.getByText('Secret Gyms and the Economics of Prohibition'));
   })
   
   it("should turn the color theme from Light Mode to Dark Mode when the modeToggle is clicked", async () => {
@@ -149,9 +134,7 @@ describe('App', () => {
     await screen.findByTestId("today-news-title");
     expect(getByText("Light Mode")).toBeInTheDocument();
     const modeToggle = getByTestId("mode-toggle");
-    act(() => {
-      fireEvent.click(modeToggle);
-    })
+    fireEvent.click(modeToggle);
     expect(getByText("Dark Mode")).toBeInTheDocument();
   });
 
