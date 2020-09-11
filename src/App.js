@@ -26,8 +26,6 @@ const App = (props) => {
   const { loading, error, data } = useQuery(NEWS_QUERY);
   const [favorites, setFavorites] = useLocalStorage('favorites', []);
   const [readlaters, setReadLaters] = useLocalStorage('readlaters', []);
-  const [favicon, setFavIcon] = useLocalStorage('favicon', []);
-  const [bmicon, setBmIcon] = useLocalStorage('bmicon', []);
 
   const [opened, setOpened] = React.useState(false);
 
@@ -41,8 +39,10 @@ const App = (props) => {
   if (!data) return <p>Not found</p>;
 
   // Getting the stories
-  const popularStories = data.hn.topStories;
-  const newStories = data.hn.newStories;
+  const popularStories = data.hn.topStories.map(item => ({ ...item, favorited: false, bookmarked: false }));
+  const newStories = data.hn.newStories.map(item => ({ ...item, favorited: false, bookmarked: false }));
+  // const popularStories = data.hn.topStories;
+  // const newStories = data.hn.newStories;
 
   // Adding postId to localStorage
 
@@ -57,15 +57,14 @@ const App = (props) => {
     if (!post) {
       return;
     }
+    const favoritePost = {
+      ...post,
+      favorited: true
+    }
     const matchingPostFound = favorites.some(fav => fav.id === post.id)
     if (!matchingPostFound) {
-      setFavorites([...favorites, post])
-      setFavIcon([...favicon, post.id]);
+      setFavorites([...favorites, favoritePost])
     }
-    
-    const faviconEle = document.getElementById("favicon-" + post.id);
-    faviconEle.setAttribute("class", "fas fa-heart");
-    
   }
 
   const addReadLaters = (post) => {
@@ -76,7 +75,6 @@ const App = (props) => {
     const matchingPostFound = readlaters.some(laters => laters.id === post.id)
     if (!matchingPostFound) {
       setReadLaters([...readlaters, post])
-      setBmIcon([...bmicon, post.id])
     }
     const bmIcon = document.getElementById("bookmarkicon-" + post.id);
     bmIcon.setAttribute("class", "fas fa-bookmark");
@@ -138,10 +136,7 @@ const App = (props) => {
                     <LatestHeader>Latest News</LatestHeader>
                     {newStories && newStories.map(item => 
                       <LatestNews 
-                        id={item.id}
-                        title={item.title}
-                        timeISO={formatDate(item.timeISO)}
-                        url={item.url}
+                        item={item}
                         key={item.id} 
                         onFavoriteClick={() => addFavorite(item)} 
                         onBookmarkClick={() => addReadLaters(item)}  /> 

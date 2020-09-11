@@ -21,10 +21,12 @@ const LatestNews = (props) => {
   return (
     <Box>
       <NewsItem 
-        id={props.id}
-        title={props.title} 
-        timeISO={props.timeISO} 
-        url={props.url}
+        favorited={props.item.favorited}
+        bookmarked={props.item.bookmarked}
+        id={props.item.id}
+        title={props.item.title}
+        timeISO={props.item.timeISO}
+        url={props.item.url}
         onFavoriteClick={props.onFavoriteClick} 
         onBookmarkClick={props.onBookmarkClick} />
     </Box>

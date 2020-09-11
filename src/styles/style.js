@@ -2,7 +2,7 @@ import styled, { css } from '@xstyled/styled-components';
 import { system } from '@xstyled/system'
 import { Link } from 'react-router-dom';
 import { pageHeaderFontStyle, fontFamily } from "./font-style"
-import {  lm_purple, lm_white, lm_favorite } from "./color"
+import {  lm_purple, lm_white, lm_favorite, lgt_bg_lightpurple } from "./color"
 import {bg, displayflex, displayflexMobile} from "./layout";
 
 // App component
@@ -298,5 +298,19 @@ export const FooterStyle = styled.footer`
   }
   .copyright{
     font-style: italic;
+  }
+`;
+
+/* Error Page */
+export const ErrorPageWrapper = styled.header`
+  ${displayflex}
+  background-color: ${lgt_bg_lightpurple};
+  height: 100vh;
+  padding: 1rem;
+  & h1, & h2{
+    color: #fff;
+  }
+  & h1{
+    margin: 0;
   }
 `;

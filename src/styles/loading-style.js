@@ -1,11 +1,12 @@
 import styled from '@xstyled/styled-components';
+import {  lgt_bg_lightpurple } from "./color"
 
 
 // Loading / Spinner
 
 export const LoadingStyle = styled.div`
   margin: 0;
-  background-color: rgba(76, 43, 250, 0.4);
+  background-color: ${lgt_bg_lightpurple};
   width: 100vw;
   height: 100vh;
   display: flex;
