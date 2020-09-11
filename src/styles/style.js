@@ -2,7 +2,7 @@ import styled, { css } from '@xstyled/styled-components';
 import { system } from '@xstyled/system'
 import { Link } from 'react-router-dom';
 import { pageHeaderFontStyle, fontFamily } from "./font-style"
-import {  lm_purple, lm_white, lm_favorite, lgt_bg_lightpurple } from "./color"
+import {  lm_purple, lm_white, lm_favorite, lgt_purple, dk_purple } from "./color"
 import {bg, displayflex, displayflexMobile} from "./layout";
 
 // App component
@@ -304,11 +304,11 @@ export const FooterStyle = styled.footer`
 /* Error Page */
 export const ErrorPageWrapper = styled.header`
   ${displayflex}
-  background-color: ${lgt_bg_lightpurple};
+  background-color: ${dk_purple};
   height: 100vh;
   padding: 1rem;
   & h1, & h2{
-    color: #fff;
+    color: ${lgt_purple};
   }
   & h1{
     margin: 0;

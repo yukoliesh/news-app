@@ -8,6 +8,8 @@ export const lm_white = "#fff;"
 export const lm_favorite = "#d91cc3";
 export const dk_bg_lightpurple = "#D7C0FE";
 export const lgt_bg_lightpurple = "rgba(76, 43, 250, 0.4)";
+export const dk_purple = "#202231";
+export const lgt_purple = "#C7A9F1";
 
 // grey
 export const grey = "#333";

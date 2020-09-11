@@ -5,7 +5,7 @@ const ErrorPage = (props) => {
   return (
     <ErrorPageWrapper>
       <h1>Error</h1>
-      <h2>Uh oh Something went wrong...</h2>
+      <h2>Sorry... Something went wrong...</h2>
     </ErrorPageWrapper>
   );
 }
