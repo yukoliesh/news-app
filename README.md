@@ -4,7 +4,7 @@ It is built based on Hacker News GraphQL API.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-**Screen shot**
+**Screen shot**  
 ![Screen shot of News App](https://github.com/yukoliesh/news-app/blob/master/news-app.jpg?raw=true)
 
 ## Available Scripts
