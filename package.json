@@ -16,12 +16,12 @@
     "@xstyled/styled-components": "^1.17.1",
     "apollo-boost": "^0.4.9",
     "graphql": "^15.3.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^9.0.0",
     "react": "^16.13.1",
     "react-device-detect": "^1.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.3",
+    "react-scripts": "^5.0.1",
     "styled-components": "^5.1.1"
   },
   "scripts": {
